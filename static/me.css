@@ -1,0 +1,140 @@
+a:hover {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    border-radius: 3px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-brand {
+    background-image: url(../src/assets/logo.jpg);
+    width: 50px;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.side-bar .list-group-item {
+    border-radius: 3px;
+    border: 0;
+    margin-bottom: 5px;
+}
+
+.list-group-subject .list-group-item.active {
+    background-color: #3399ff;
+}
+
+.list-group-year .list-group-item.active {
+    background-color: #5cadff;
+}
+
+.exam-list-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    /*border-bottom: 1px solid #eee;*/
+}
+
+.exam-list-item:first-child {
+    padding-top: 0;
+}
+
+.exam-list-item .title ,
+.exam-list-item .year {
+    display: block;
+    color: #444;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.exam-list-item .year{
+    font-size: 16px;
+}
+
+.exam-list-item .title:hover {
+    color: #337ab7;
+}
+
+.exam-list-item .info {
+    color: #888;
+}
+
+/*exam-display*/
+
+.status-bar {
+    background-color: rgba(0, 0, 0, .05);
+    border-radius: 3px;
+    padding: 20px 20px;
+}
+
+.status-bar .timer>* {
+    padding-bottom: 10px;
+    text-align: center;
+    font-family: monospace;
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 3;
+}
+
+.question-list .question-list-title {
+    display: block;
+    color: #444;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    border-bottom: 2px dashed rgba(0,0,0,.1);
+}
+
+.question-list .question-list-item{
+    border-bottom: 1px dashed rgba(0,0,0,.07);
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.question-list .question-list-item .number{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.question-list .question-list-item .content,
+.answer .choice-list .choice-list-item{
+    font-size: 14px;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+}
+
+.answer .choice-list .choice-list-item{
+    color : rgba(0,0,0,0.7);
+}
+
+
+.answer{
+    padding: 10px;
+}
+
+/*exam-answer*/
+
+.status-bar .btn-back{
+    background-color: rgba(213, 159, 28,0.7);
+}
+
+.question-list .question-list-item .explain .explain-title{
+    color: rgba(255,0,0,0.9);
+    font-size: 15px;
+}
+
+.question-list .question-list-item .explain{
+    margin-bottom : 10px;
+}
