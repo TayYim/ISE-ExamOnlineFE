@@ -8,8 +8,8 @@
     <ExamList :exams="exams" @selectExam="selectExam"></ExamList>
     </Col>
   </Row>
-  <Row v-show="examSelected">
-      <ExamConfirm></ExamConfirm>
+  <Row v-if="examSelected">
+      <ExamConfirm :exam="exam" @goBack="toggleSelected"></ExamConfirm>
   </Row>
 </div>
 </template>
@@ -25,6 +25,7 @@ export default {
     return {
       exams: [],
       errors: [],
+      exam: {},
       examSelected: false
     }
   },
@@ -60,7 +61,15 @@ export default {
     },
     selectExam(exam){
         this.toggleSelected();
-        console.log(exam);
+        this.exam = exam;
+        // let host = `http://localhost:3000/paper`;
+        // this.axios.get(host)
+        //   .then(response => {
+        //     this.exam.total = response.data.ProblemNum;
+        //   })
+        //   .catch(e => {
+        //     this.errors.push(e)
+        //   })
     },
     toggleSelected(){
         this.examSelected = !this.examSelected;

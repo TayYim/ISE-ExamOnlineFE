@@ -1,8 +1,7 @@
 <template>
 <div id="ExamConfirm">
-  <h1>软件工程导论</h1>
-  <h2>2017</h2>
-  <h3>共20道题</h3>
+  <h1>{{exam.paper_title}}</h1>
+  <h2>{{exam.paper_year}}</h2>
   <Row type="flex" justify="space-around" class="code-row-bg">
     <Col span="6">
     <Button @click="goBack" type="default" size="large">返回</Button>
@@ -15,11 +14,13 @@
 export default {
   name: "ExamConfirm",
   data: () => ({
-
   }),
+
+  props: ['exam'],
+
   methods: {
     goBack() {
-      console.log('back');
+      this.$emit('goBack');
     },
     beginExam() {
       console.log('begin');
