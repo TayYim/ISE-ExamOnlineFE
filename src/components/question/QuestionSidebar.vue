@@ -1,11 +1,11 @@
 <template>
-  <div id="Question">
+  <div id="QuestionSidebar">
 
   </div>
 </template>
 <script>
 export default {
-  name: "Question",
+  name: "QuestionSidebar",
   data: () => ({
 
   })

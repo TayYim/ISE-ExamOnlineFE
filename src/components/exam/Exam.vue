@@ -8,7 +8,7 @@
     <ExamList :exams="exams" @selectExam="selectExam"></ExamList>
     </Col>
   </Row>
-  <Row v-if="examSelected">
+  <Row v-show="examSelected">
       <ExamConfirm :exam="exam" @goBack="toggleSelected"></ExamConfirm>
   </Row>
 </div>
