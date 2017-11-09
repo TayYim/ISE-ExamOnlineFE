@@ -19,6 +19,19 @@ Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
+// Vue.prototype.getJSON = function(host){
+//     var posts;
+//     this.axios.get(host)
+//       .then(response => {
+//         posts =  response.data;
+//       })
+//       .catch(e => {
+//         // this.errors.push(e)
+//         console.log('error');
+//       })
+//     return posts;
+// }
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

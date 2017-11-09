@@ -4,7 +4,7 @@
     <div v-for="paper of exam.papers" class="exam-list-item">
       <Row type="flex" justify="space-around" class="code-row-bg">
         <Col span="15">
-        <Button @click="selectExam(paper.id)" type="text" long>
+        <Button @click="selectExam(paper)" type="text" long>
         <Card>
           <p @click="selectExam($event)" slot="title">{{paper.paper_title}}</p>
           <p>{{paper.paper_year}}</p>
@@ -29,8 +29,8 @@ export default {
   props: ['exams'],
 
   methods: {
-    selectExam(exam_id) {
-      this.$emit('selectExam',exam_id);
+    selectExam(exam) {
+      this.$emit('selectExam',exam);
     }
   }
 }

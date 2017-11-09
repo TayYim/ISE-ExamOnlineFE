@@ -49,7 +49,7 @@ export default {
       if (course_id !== '0') {
         host = host + `?course=` + course_id;
       }
-      //get exam papers
+    //   get exam papers
       this.axios.get(host)
         .then(response => {
           this.exams = response.data;
@@ -58,8 +58,12 @@ export default {
           this.errors.push(e)
         })
     },
-    selectExam(exam_id){
-        console.log(exam_id);
+    selectExam(exam){
+        this.toggleSelected();
+        console.log(exam);
+    },
+    toggleSelected(){
+        this.examSelected = !this.examSelected;
     }
   }
 }
