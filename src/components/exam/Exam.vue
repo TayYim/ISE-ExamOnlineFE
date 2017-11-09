@@ -1,12 +1,15 @@
 <template>
 <div id="Exam">
-  <Row>
+  <Row v-show="!examSelected">
     <Col span="10">
     <ExamSidebar @getExams="showExams"></ExamSidebar>
     </Col>
     <Col span="14">
-    <ExamList :exams="posts"></ExamList>
+    <ExamList :exams="exams" @selectExam="selectExam"></ExamList>
     </Col>
+  </Row>
+  <Row v-show="examSelected">
+      <ExamConfirm></ExamConfirm>
   </Row>
 </div>
 </template>
@@ -14,18 +17,21 @@
 <script>
 import ExamSidebar from '@/components/exam/ExamSidebar';
 import ExamList from '@/components/exam/ExamList';
+import ExamConfirm from '@/components/exam/ExamConfirm';
 
 export default {
   name: "Exam",
   data() {
     return {
-      posts: [],
-      errors: []
+      exams: [],
+      errors: [],
+      examSelected: false
     }
   },
   components: {
     ExamSidebar,
-    ExamList
+    ExamList,
+    ExamConfirm
   },
 
   created() {
@@ -34,6 +40,10 @@ export default {
   },
 
   methods: {
+    /**
+     * get exam papers by course_id
+     * @param  {[String]} course_id
+     */
     showExams(course_id) {
       let host = `http://localhost:3000/subject`;
       if (course_id !== '0') {
@@ -42,11 +52,14 @@ export default {
       //get exam papers
       this.axios.get(host)
         .then(response => {
-          this.posts = response.data;
+          this.exams = response.data;
         })
         .catch(e => {
           this.errors.push(e)
         })
+    },
+    selectExam(exam_id){
+        console.log(exam_id);
     }
   }
 }
