@@ -5,7 +5,7 @@
   <Row type="flex" justify="space-around" class="code-row-bg">
     <Col span="6">
     <Button @click="goBack" type="default" size="large">返回</Button>
-    <Button @click="beginExam" type="primary" size="large">开始答题</Button>
+    <router-link :to="{ name: 'question', params: { exam_id: exam.id}}"><Button @click="beginExam" type="primary" size="large">开始答题</Button></router-link>
     </Col>
   </Row>
 </div>
@@ -23,7 +23,7 @@ export default {
       this.$emit('goBack');
     },
     beginExam() {
-      console.log('begin');
+      console.log('begin'); //nothing to do
     }
   }
 }

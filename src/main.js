@@ -19,6 +19,9 @@ Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
+Vue.prototype.bus = new Vue()
+
+
 // Vue.prototype.getJSON = function(host){
 //     var posts;
 //     this.axios.get(host)
