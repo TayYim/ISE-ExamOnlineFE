@@ -19,7 +19,7 @@ export default new Router({
       component: Exam
   },
   {
-      path: '/question/:exam_id',
+      path: '/question/:examId',
       name: 'question',
       component: Question
   }

@@ -5,7 +5,7 @@
     <QuestionSidebar></QuestionSidebar>
     </Col>
     <Col span="14">
-    <QuestionDisplay :exam_id="$route.params.exam_id"></QuestionDisplay>
+    <QuestionDisplay :examId="$route.params.examId"></QuestionDisplay>
     </Col>
   </Row>
 </div>

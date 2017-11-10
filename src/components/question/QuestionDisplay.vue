@@ -1,34 +1,38 @@
 <template>
 <div id="QuestionDisplay">
-  <Button @click="getExamPaper">generate</Button>
+  <Button @click="fetchData">generate</Button>
+  <Button @click="showSelect">show select</Button>
 
-  <div>
+  <div v-for="(question,index) in questions" v-if="currentSlide === index">
     <Row>
       <Col span="4">
-      <strong>1.</strong>
+      <strong>{{index+1}}.</strong>
       </Col>
       <Col span="14" align='left'>
       <div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        {{question.pro_detail}}
       </div>
       <div>
-        <RadioGroup vertical>
-          <Radio label="A">
-            <span>Apple</span>
-          </Radio>
-          <Radio label="B">
-            <span>Android</span>
-          </Radio>
-          <Radio label="C">
-            <span>Windows</span>
-          </Radio>
-          <Radio label="D">
-            <span>👀</span>
-          </Radio>
-        </RadioGroup>
+        <RadioGroup v-model="userSelect[index]" vertical>
+            <Radio label="A">
+              <span>{{question.option[0]}}</span>
+            </Radio>
+            <Radio label="B">
+              <span>{{question.option[1]}}</span>
+            </Radio>
+            <Radio label="C">
+              <span>{{question.option[2]}}</span>
+            </Radio>
+            <Radio label="D">
+              <span>{{question.option[3]}}</span>
+            </Radio>
+      </RadioGroup>
       </div>
       </Col>
+    </Row>
+    <Row>
+        <Button type="info" size="large" @click="prev">上一题</Button>
+        <Button type="info" size="large" @click="next">下一题</Button>
     </Row>
   </div>
 </div>
@@ -37,24 +41,62 @@
 export default {
   name: "QuestionDisplay",
   data: () => ({
-    examPaper: {},
-    questions: []
+    questionsHead: [],
+    totalNum: [],
+    questions: [],
+    userSelect: [],
+    currentSlide: 0
   }),
-  props: ['exam_id'],
+
+  props: ['examId'],
+
   methods: {
-    getExamPaper() {
+    fetchData() {
       let host = `http://localhost:3000/paper`;
-      host = host + `?paperId=` + this.exam_id;
-      //   get exam papers
+      host = host + `?paperId=` + this.examId;
+
       this.axios.get(host)
         .then(response => {
-          this.examPaper = Object.assign({}, response.data[0]) || {};
+          let examPaper = Object.assign({}, response.data[0]) || {};
+          this.questionsHead = examPaper.Problems;
+          this.totalNum = examPaper.ProblemNum;
+          this.userSelect = Array(this.totalNum).fill("");
+          for (let head of this.questionsHead) {
+            let id = head.ProblemId;
+            let host = `http://localhost:3000/problem`;
+            host = host + `?id=` + id;
+            this.axios.get(host)
+              .then(response => {
+                let question = response.data[0];
+                this.questions.push(question);
+              })
+              .catch(e => {
+                console.log(e);
+              })
+
+          }
         })
         .catch(e => {
-          this.errors.push(e)
+          console.log(e);
         })
+    },
 
+    showSelect(){
+        console.log(this.userSelect);
+    },
+
+    prev(){
+        this.currentSlide--;
+    },
+
+    next(){
+        this.currentSlide++;
     }
+
+  },
+
+  computed: {
+
   }
 }
 </script>
