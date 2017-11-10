@@ -62,14 +62,6 @@ export default {
     selectExam(exam){
         this.toggleSelected();
         this.exam = exam;
-        // let host = `http://localhost:3000/paper`;
-        // this.axios.get(host)
-        //   .then(response => {
-        //     this.exam.total = response.data.ProblemNum;
-        //   })
-        //   .catch(e => {
-        //     this.errors.push(e)
-        //   })
     },
     toggleSelected(){
         this.examSelected = !this.examSelected;

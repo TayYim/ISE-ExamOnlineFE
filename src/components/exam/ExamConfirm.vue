@@ -5,7 +5,9 @@
   <Row type="flex" justify="space-around" class="code-row-bg">
     <Col span="6">
     <Button @click="goBack" type="default" size="large">返回</Button>
-    <router-link :to="{ name: 'question', params: { examId: exam.id}}"><Button @click="beginExam" type="primary" size="large">开始答题</Button></router-link>
+    <router-link :to="{ name: 'question', params: { examId: exam.id}}">
+      <Button @click="beginExam" type="primary" size="large">开始答题</Button>
+    </router-link>
     </Col>
   </Row>
 </div>
@@ -13,8 +15,7 @@
 <script>
 export default {
   name: "ExamConfirm",
-  data: () => ({
-  }),
+  data: () => ({}),
 
   props: ['exam'],
 
@@ -23,7 +24,8 @@ export default {
       this.$emit('goBack');
     },
     beginExam() {
-      console.log('begin'); //nothing to do
+      let {id,paper_title:title,paper_year:year} = this.exam;
+      this.bus.$emit('logExam',{'id':id,'title':title,'year':year});
     }
   }
 }
