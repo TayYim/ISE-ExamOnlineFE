@@ -1,7 +1,7 @@
 <template>
 <div id="QuestionDisplay">
-  <Button @click="fetchData">generate</Button>
-  <Button @click="showSelect">show select</Button>
+  <!-- <Button @click="fetchData">generate</Button>
+  <Button @click="showSelect">show select</Button> -->
 
   <div v-for="(question,index) in questions" v-if="currentSlide === index">
     <Row>
@@ -14,29 +14,30 @@
       </div>
       <div>
         <RadioGroup v-model="userSelect[index]" vertical>
-            <Radio label="A">
-              <span>{{question.option[0]}}</span>
-            </Radio>
-            <Radio label="B">
-              <span>{{question.option[1]}}</span>
-            </Radio>
-            <Radio label="C">
-              <span>{{question.option[2]}}</span>
-            </Radio>
-            <Radio label="D">
-              <span>{{question.option[3]}}</span>
-            </Radio>
-      </RadioGroup>
+          <Radio label="A">
+            <span>{{question.option[0]}}</span>
+          </Radio>
+          <Radio label="B">
+            <span>{{question.option[1]}}</span>
+          </Radio>
+          <Radio label="C">
+            <span>{{question.option[2]}}</span>
+          </Radio>
+          <Radio label="D">
+            <span>{{question.option[3]}}</span>
+          </Radio>
+        </RadioGroup>
       </div>
       </Col>
     </Row>
     <Row>
-        <Button type="info" size="large" @click="prev">上一题</Button>
-        <Button type="info" size="large" @click="next">下一题</Button>
+      <Button v-show="currentSlide>0" type="info" size="large" @click="prev">上一题</Button>
+      <Button v-show="currentSlide<totalNum-1" type="info" size="large" @click="next">下一题</Button>
     </Row>
   </div>
 </div>
 </template>
+
 <script>
 export default {
   name: "QuestionDisplay",
@@ -49,6 +50,15 @@ export default {
   }),
 
   props: ['examId'],
+
+  mounted() {
+    //do something after mounting vue instance
+    this.fetchData();
+    var me = this;
+    this.bus.$on('submitExam', function () {
+      me.showSelect();
+    })
+  },
 
   methods: {
     fetchData() {
@@ -81,21 +91,17 @@ export default {
         })
     },
 
-    showSelect(){
-        console.log(this.userSelect);
+    showSelect() {
+      console.log(this.userSelect);
     },
 
-    prev(){
-        this.currentSlide--;
+    prev() {
+      this.currentSlide--;
     },
 
-    next(){
-        this.currentSlide++;
+    next() {
+      this.currentSlide++;
     }
-
-  },
-
-  computed: {
 
   }
 }
