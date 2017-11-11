@@ -32,7 +32,7 @@ const store = new Vuex.Store({
     questionsHead: [],
     userName: "admin",
     userEmail: "admin@qq.com",
-    isLogged: false
+    isLogged: true
   },
   mutations: {
     logExam(state,exam){

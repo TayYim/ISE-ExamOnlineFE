@@ -55,4 +55,7 @@ export default {
 }
 </script>
 <style lang="css" scoped>
+#QuestionSidebar{
+    margin-top: 40px;
+}
 </style>

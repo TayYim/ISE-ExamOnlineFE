@@ -143,4 +143,8 @@ export default {
     margin: 40px;
     line-height: 2;
 }
+
+#QuestionDisplay{
+    margin-top: 40px;
+}
 </style>
