@@ -41,7 +41,18 @@ const store = new Vuex.Store({
   },
     logExam(state,exam){
       state.exam = exam;
-      console.log(state.exam);
+  },
+    logTotalNum(state,totalNum){
+      state.totalNum = totalNum;
+  },
+    logUserSelect(state,userSelect){
+      state.userSelect = userSelect;
+  },
+    logQuestions(state,questions){
+      state.questions = questions;
+  },
+    logQuestionsHead(state,questionsHead){
+      state.questionsHead = questionsHead;
   }
   }
 })

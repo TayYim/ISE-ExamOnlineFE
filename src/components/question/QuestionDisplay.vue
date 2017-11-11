@@ -2,8 +2,6 @@
 <div id="QuestionDisplay">
   <!-- <Button @click="fetchData">generate</Button>
   <Button @click="showSelect">show select</Button> -->
-  <Button @click="test">logExam</Button>
-  {{exam.id}}
   <div v-for="(question,index) in questions" v-if="currentSlide === index">
     <Row>
       <Col span="4">
@@ -11,21 +9,21 @@
       </Col>
       <Col span="14" align='left'>
       <div>
-        {{question.pro_detail}}
+        {{question.content}}
       </div>
       <div>
         <RadioGroup v-model="userSelect[index]" vertical>
           <Radio label="A">
-            <span>{{question.option[0]}}</span>
+            <span>{{question.options[0]}}</span>
           </Radio>
           <Radio label="B">
-            <span>{{question.option[1]}}</span>
+            <span>{{question.options[1]}}</span>
           </Radio>
           <Radio label="C">
-            <span>{{question.option[2]}}</span>
+            <span>{{question.options[2]}}</span>
           </Radio>
           <Radio label="D">
-            <span>{{question.option[3]}}</span>
+            <span>{{question.options[3]}}</span>
           </Radio>
         </RadioGroup>
       </div>
@@ -41,7 +39,8 @@
 
 <script>
 import {
-  mapState
+  mapState,
+  mapMutations
 } from 'vuex'
 
 export default {
@@ -53,8 +52,6 @@ export default {
     userSelect: [],
     currentSlide: 0
   }),
-
-  props: ['examId'],
 
   mounted() {
     //do something after mounting vue instance
@@ -68,7 +65,7 @@ export default {
   methods: {
     fetchData() {
       let host = `http://localhost:3000/paper`;
-      host = host + `?paperId=` + this.examId;
+      host = host + `?paperId=` + this.exam.id;
 
       this.axios.get(host)
         .then(response => {
@@ -83,6 +80,12 @@ export default {
             this.axios.get(host)
               .then(response => {
                 let question = response.data[0];
+                let {id,option,pro_detail} = question;
+                question={
+                    id:id,
+                    options:option,
+                    content:pro_detail
+                }
                 this.questions.push(question);
               })
               .catch(e => {
@@ -90,10 +93,18 @@ export default {
               })
 
           }
+          this.logData();
         })
         .catch(e => {
           console.log(e);
         })
+    },
+
+    logData() {
+      this.logTotalNum(this.totalNum);
+      this.logUserSelect(this.userSelect);
+      this.logQuestions(this.questions);
+      this.logQuestionsHead(this.questionsHead);
     },
 
     showSelect() {
@@ -108,12 +119,18 @@ export default {
       this.currentSlide++;
     },
 
-    test(){
-        console.log(this.exam);
-    }
+    test() {
+      console.log(this.exam);
+    },
+
+    ...mapMutations([
+      'logTotalNum',
+      'logUserSelect',
+      'logQuestions',
+      'logQuestionsHead'
+    ]),
   },
   computed: mapState([
-    // 映射 this.count 为 store.state.count
     'exam'
   ])
 }
