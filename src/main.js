@@ -15,9 +15,6 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
-import VueParticles from 'vue-particles'
-Vue.use(VueParticles)
-
 import Vuex from 'vuex'
 Vue.use(Vuex)
 

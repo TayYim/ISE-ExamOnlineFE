@@ -19,7 +19,6 @@
     "vue": "^2.5.2",
     "vue-axios": "^2.0.2",
     "vue-markdown": "^2.2.4",
-    "vue-particles": "^1.0.9",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "wowjs": "^1.1.3"
