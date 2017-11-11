@@ -19,7 +19,7 @@
         </Menu-item>
       </router-link>
       <Menu-item name="3">
-        错题本
+        题目收藏
       </Menu-item>
       </Col>
       <Col span="4" offset="8" v-if="!isLogged">
