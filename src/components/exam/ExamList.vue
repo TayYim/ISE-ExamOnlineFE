@@ -8,7 +8,6 @@
         <Card>
           <p @click="selectExam($event)" slot="title">{{paper.paper_title}}</p>
           <p>{{paper.paper_year}}</p>
-          <p>(for test)id:{{paper.id}}</p>
         </Card>
         </Button>
         </Col>
@@ -22,8 +21,6 @@
 export default {
   name: "ExamList",
   data: () => ({
-    // exams: [],
-    // errors: []
   }),
 
   props: ['exams'],
@@ -38,4 +35,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+#ExamList{
+    margin-top: 40px;
+}
 </style>

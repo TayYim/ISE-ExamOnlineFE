@@ -9,7 +9,7 @@
             <h1>真的刷题 刷出声</h1>
             <p>学习者的大事，大快所有人心的大好事</p>
             <div>
-              <a class="btn btn-home" href="#about" role="button">来呀快活呀</a>
+              <router-link to="/exam"><a class="btn btn-home" href="#about" role="button">来呀快活呀</a></router-link>
             </div>
           </div>
         </div>
@@ -44,7 +44,6 @@
                 </li>
                 <li>
                   <div class="dash seconds_dash">
-                    <div class="digit">9</div>
                     <div class="digit">9</div>
                     <div class="digit">9</div>
                     <div class="digit">次</div>

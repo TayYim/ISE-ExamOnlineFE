@@ -1,16 +1,18 @@
 <template>
 <div id="Exam">
-  <Row v-show="!examSelected">
-    <Col span="10">
-    <ExamSidebar @getExams="showExams"></ExamSidebar>
-    </Col>
-    <Col span="14">
-    <ExamList :exams="exams" @selectExam="selectExam"></ExamList>
-    </Col>
-  </Row>
-  <Row v-show="examSelected">
-    <ExamConfirm :exam="exam" @goBack="toggleSelected"></ExamConfirm>
-  </Row>
+  <div class="container">
+    <Row v-show="!examSelected">
+      <Col span="10">
+      <ExamSidebar @getExams="showExams"></ExamSidebar>
+      </Col>
+      <Col span="14">
+      <ExamList :exams="exams" @selectExam="selectExam"></ExamList>
+      </Col>
+    </Row>
+    <Row v-show="examSelected">
+      <ExamConfirm :exam="exam" @goBack="toggleSelected"></ExamConfirm>
+    </Row>
+  </div>
 </div>
 </template>
 

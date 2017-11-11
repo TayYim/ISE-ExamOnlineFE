@@ -46,7 +46,7 @@ export default {
 </script>
 <style lang="css" scoped>
 #Navbar{
-    margin-bottom: 20px;
+    margin-bottom: 2px;
 }
 
 #brand{

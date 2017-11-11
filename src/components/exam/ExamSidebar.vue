@@ -27,5 +27,7 @@ export default {
 }
 </script>
 <style lang="css" scoped>
-
+#ExamSidebar{
+    margin-top: 40px;
+}
 </style>
