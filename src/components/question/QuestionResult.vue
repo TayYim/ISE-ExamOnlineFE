@@ -1,7 +1,6 @@
 <template>
 <div id="QuestionDisplay">
   <div class="container">
-    <Button @click="">userResult</Button>
     <h1>{{exam.title}}</h1>
     <h2>{{exam.year}}</h2>
     <h3>共{{totalNum}}题 你答对了{{totalCorrect}}题</h3>
@@ -28,11 +27,11 @@
       <Row class="explain">
         <Col span="8" offset="4" align="left">
         <p v-bind:class="{correct: userResults[index], wrong: !userResults[index]}">你的选择:{{showSelectABCD(index)}}</p>
-        <p>正确答案:B</p>
+        <p>正确答案:{{correctOptions[index]}}</p>
         <Collapse>
           <Panel name="1">
             查看解析：
-            <p slot="content">this is jiexi</p>
+            <p slot="content">{{questionAnswers[index].explain}}</p>
           </Panel>
         </Collapse>
         </Col>
@@ -54,17 +53,19 @@ export default {
     userResults: [],
     questionAnswers: [],
     userSelectPacks: [],
+    correctOptions: [],
     totalCorrect: 0
   }),
 
   mounted() {
     //do something after mounting vue instance
     this.fetchData();
+    this.fetchQuestionAnswers();
   },
 
   methods: {
     fetchData() {
-      this.fetchUserResult();
+      this.fetchUserResults();
     },
 
     packupUserSelect(index) {
@@ -75,7 +76,7 @@ export default {
       return pack;
     },
 
-    fetchUserResult() {
+    fetchUserResults() {
       let baseHost = this.baseUrl + `judge`;
 
       for (var i = 0; i < this.totalNum; i++) {
@@ -85,7 +86,25 @@ export default {
           .then(response => {
             let result = Object.assign({}, response.data[0]) || {};
             this.userResults.push(result.result);
-            this.totalCorrect = this.totalCorrect + 1*result.result;
+            this.totalCorrect = this.totalCorrect + 1 * result.result;
+          })
+          .catch(e => {
+            console.log(e);
+          })
+      }
+    },
+
+    fetchQuestionAnswers() {
+      let baseHost = this.baseUrl + `answer`;
+
+      for (var i = 0; i < this.totalNum; i++) {
+        let pack = this.packupUserSelect(i);
+        let host = baseHost + `?id=` + pack.ProblemId;
+        this.axios.get(host)
+          .then(response => {
+            let answer = Object.assign({}, response.data[0]) || {};
+            this.questionAnswers.push(answer);
+            this.correctOptions.push(this.showABCD(String(answer.correct)));
           })
           .catch(e => {
             console.log(e);
@@ -109,12 +128,8 @@ export default {
       return this.showABCD(option);
     },
 
-    showAnswerABCD(index) {
-      let option = this.questionAnswers[index];
-      return this.showABCD(option);
-    },
-
     showABCD(option) {
+    //   option = option.toString();
       switch (option) {
         case "0":
           return "A";
