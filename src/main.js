@@ -29,7 +29,10 @@ const store = new Vuex.Store({
     totalNum: 0,
     userSelect: [],
     questions: [],
-    questionsHead: []
+    questionsHead: [],
+    userName: "admin",
+    userEmail: "admin@qq.com",
+    isLogged: false
   },
   mutations: {
     logExam(state,exam){
@@ -46,6 +49,15 @@ const store = new Vuex.Store({
   },
     logQuestionsHead(state,questionsHead){
       state.questionsHead = questionsHead;
+  },
+    setUserName(state,userName){
+      state.userName = userName;
+  },
+    setUseEmail(state,useEmail){
+      state.useEmail = useEmail;
+  },
+    toggleLogged(state){
+      state.isLogged = !state.isLogged;
   }
   },
   getters: {
