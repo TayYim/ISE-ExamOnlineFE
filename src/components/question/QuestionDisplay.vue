@@ -11,16 +11,16 @@
       </div>
       <div>
         <RadioGroup v-model="userSelect[index]" vertical class="options">
-          <Radio label="A">
+          <Radio label="0">
             <span v-html="_expr(question.options[0])"></span>
           </Radio>
-          <Radio label="B">
+          <Radio label="1">
             <span v-html="_expr(question.options[1])"></span>
           </Radio>
-          <Radio label="C">
+          <Radio label="2">
             <span v-html="_expr(question.options[2])"></span>
           </Radio>
-          <Radio label="D">
+          <Radio label="3">
             <span v-html="_expr(question.options[3])"></span>
           </Radio>
         </RadioGroup>

@@ -51,7 +51,8 @@ export default {
   name: "QuestionResult",
   data: () => ({
     userResults: [],
-    questionAnswers: []
+    questionAnswers: [],
+    userSelectPack: []
   }),
 
   mounted() {
@@ -61,6 +62,10 @@ export default {
 
   methods: {
     fetchData() {
+
+    },
+
+    packupSelect(){
 
     },
 
