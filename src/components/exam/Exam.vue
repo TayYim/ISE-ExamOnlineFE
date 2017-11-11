@@ -46,7 +46,7 @@ export default {
      * @param  {[String]} course_id
      */
     showExams(course_id) {
-      let host = `http://localhost:3000/subject`;
+      let host = this.baseUrl +  `subject`;
       if (course_id !== '0') {
         host = host + `?course=` + course_id;
       }
@@ -66,7 +66,12 @@ export default {
     toggleSelected(){
         this.examSelected = !this.examSelected;
     }
-  }
+},
+computed:{
+    baseUrl(){
+        return this.$store.state.baseUrl;
+    }
+}
 }
 </script>
 

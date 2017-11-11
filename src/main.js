@@ -24,7 +24,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    count: 0,
+    baseUrl: `http://localhost:3000/`,
     exam:{
         id: 0,
         title: "",
@@ -36,9 +36,6 @@ const store = new Vuex.Store({
     questionsHead: []
   },
   mutations: {
-    increment (state) {
-      state.count++
-  },
     logExam(state,exam){
       state.exam = exam;
   },

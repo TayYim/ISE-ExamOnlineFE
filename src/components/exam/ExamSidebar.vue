@@ -10,26 +10,6 @@
         </Col>
       </Row>
     </Menu>
-    <!-- <div class="col-sm-6">
-      <div class="hidden-xs list-group side-bar  list-group-subject">
-
-        <a @click="getExams($event)" id="0" class="list-group-item">全部</a>
-        <a @click="getExams($event)" id="1" class="list-group-item">高等数学</a>
-        <a @click="getExams($event)" id="2" class="list-group-item">软工导论</a>
-      </div>
-    </div> -->
-    <!-- <div class="col-sm-6">
-      <div class="hidden-xs list-group side-bar  list-group-year">
-        <a href="#" class="list-group-item active">全部</a>
-        <a href="#" class="list-group-item">2017</a>
-        <a href="#" class="list-group-item">2016</a>
-        <a href="#" class="list-group-item">2015</a>
-        <a href="#" class="list-group-item">2014</a>
-        <a href="#" class="list-group-item">2013</a>
-        <a href="#" class="list-group-item">2012</a>
-        <a href="#" class="list-group-item">2011</a>
-      </div>
-    </div> -->
   </Row>
 </div>
 </template>

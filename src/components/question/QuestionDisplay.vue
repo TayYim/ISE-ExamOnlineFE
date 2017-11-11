@@ -64,7 +64,7 @@ export default {
 
   methods: {
     fetchData() {
-      let host = `http://localhost:3000/paper`;
+      let host = this.baseUrl +  `paper`;
       host = host + `?paperId=` + this.exam.id;
 
       this.axios.get(host)
@@ -75,7 +75,7 @@ export default {
           this.userSelect = Array(this.totalNum).fill("");
           for (let head of this.questionsHead) {
             let id = head.ProblemId;
-            let host = `http://localhost:3000/problem`;
+            let host = this.baseUrl + `problem`;
             host = host + `?id=` + id;
             this.axios.get(host)
               .then(response => {
@@ -131,7 +131,8 @@ export default {
     ]),
   },
   computed: mapState([
-    'exam'
+    'exam',
+    'baseUrl'
   ])
 }
 </script>
