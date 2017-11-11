@@ -38,6 +38,7 @@ export default {
 
     ok() {
       this.$Message.success('交卷成功');
+      this.$emit('submitted');
     }
 
   },

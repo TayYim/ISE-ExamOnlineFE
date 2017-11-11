@@ -113,10 +113,6 @@ export default {
       this.currentSlide++;
     },
 
-    test() {
-      console.log(this.exam);
-    },
-
     ...mapMutations([
       'logTotalNum',
       'logUserSelect',
