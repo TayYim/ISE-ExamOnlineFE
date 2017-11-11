@@ -2,8 +2,8 @@
 <div id="QuestionDisplay">
   <!-- <Button @click="fetchData">generate</Button>
   <Button @click="showSelect">show select</Button> -->
-  {{count}}
-  <Button @click="test">plus</Button>
+  <Button @click="test">logExam</Button>
+  {{exam.id}}
   <div v-for="(question,index) in questions" v-if="currentSlide === index">
     <Row>
       <Col span="4">
@@ -40,6 +40,10 @@
 </template>
 
 <script>
+import {
+  mapState
+} from 'vuex'
+
 export default {
   name: "QuestionDisplay",
   data: () => ({
@@ -58,9 +62,6 @@ export default {
     var me = this;
     this.bus.$on('submitExam', function () {
       me.showSelect();
-    })
-    this.bus.$on('logExam', function (exam) {
-      console.log(exam);
     })
   },
 
@@ -106,7 +107,15 @@ export default {
     next() {
       this.currentSlide++;
     },
-  }
+
+    test(){
+        console.log(this.exam);
+    }
+  },
+  computed: mapState([
+    // 映射 this.count 为 store.state.count
+    'exam'
+  ])
 }
 </script>
 <style lang="css" scoped>

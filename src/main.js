@@ -24,12 +24,25 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    count: 0
+    count: 0,
+    exam:{
+        id: 0,
+        title: "",
+        year: ""
+    },
+    totalNum: 0,
+    userSelect: [],
+    questions: [],
+    questionsHead: []
   },
   mutations: {
     increment (state) {
       state.count++
-    }
+  },
+    logExam(state,exam){
+      state.exam = exam;
+      console.log(state.exam);
+  }
   }
 })
 
