@@ -58,6 +58,9 @@ export default {
     this.bus.$on('submitExam', function () {
       me.showSelect();
     })
+    this.bus.$on('logExam',function(exam){
+        console.log(exam);
+    })
   },
 
   methods: {

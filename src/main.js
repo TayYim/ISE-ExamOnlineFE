@@ -19,23 +19,24 @@ Vue.use(VueAxios, axios)
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
 
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  }
+})
+
 Vue.config.productionTip = false
 
 Vue.prototype.bus = new Vue()
 
-
-// Vue.prototype.getJSON = function(host){
-//     var posts;
-//     this.axios.get(host)
-//       .then(response => {
-//         posts =  response.data;
-//       })
-//       .catch(e => {
-//         // this.errors.push(e)
-//         console.log('error');
-//       })
-//     return posts;
-// }
 
 /* eslint-disable no-new */
 new Vue({
