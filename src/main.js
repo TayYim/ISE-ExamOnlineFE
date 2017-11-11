@@ -54,6 +54,11 @@ const store = new Vuex.Store({
     logQuestionsHead(state,questionsHead){
       state.questionsHead = questionsHead;
   }
+  },
+  getters: {
+    userDone: state => {
+      return state.userSelect.filter(select => select).length;
+    }
   }
 })
 

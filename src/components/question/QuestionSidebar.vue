@@ -1,8 +1,8 @@
 <template>
 <div id="QuestionSidebar">
-    <h1>{{exam.title}}</h1>
-    <h2>{{exam.year}}</h2>
-    <h3>共{{totalNum}}题</h3>
+  <h1>{{exam.title}}</h1>
+  <h2>{{exam.year}}</h2>
+  <h3>共{{totalNum}}题 已作答{{userDone}}题</h3>
   <Button type="success" size="large" @click="submitExam">交卷</Button>
 </div>
 </template>
@@ -25,11 +25,16 @@ export default {
       this.bus.$emit('submitExam')
     }
   },
-  computed: mapState([
-    'exam',
-    'totalNum',
-    'userSelect'
-  ])
+  computed: {
+    ...mapState([
+      'exam',
+      'totalNum',
+      'userSelect'
+    ]),
+    userDone(){
+        return this.$store.getters.userDone;
+    }
+  }
 }
 </script>
 <style lang="css" scoped>
