@@ -1,6 +1,7 @@
 <template>
 <div id="QuestionDisplay">
   <div class="container">
+    <Button @click="fetchUserResult">userResult</Button>
     <h1>{{exam.title}}</h1>
     <h2>{{exam.year}}</h2>
     <h3>共{{totalNum}}题 你答对了2题</h3>
@@ -26,7 +27,7 @@
       </Row>
       <Row class="explain">
         <Col span="8" offset="4" align="left">
-        <p>你的选择:A</p>
+        <p>你的选择:{{showSelectABCD(index)}}</p>
         <p>正确答案:B</p>
         <Collapse>
           <Panel name="1">
@@ -52,7 +53,7 @@ export default {
   data: () => ({
     userResults: [],
     questionAnswers: [],
-    userSelectPack: []
+    userSelectPacks: []
   }),
 
   mounted() {
@@ -65,8 +66,29 @@ export default {
 
     },
 
-    packupSelect(){
+    packupUserSelect(index) {
+      let pack = {
+        ProblemId: this.questionsHead[index].ProblemId,
+        userSelect: this.userSelect[index]
+      };
+      return pack;
+    },
 
+    fetchUserResult() {
+      let baseHost = this.baseUrl + `judge`;
+
+      for (var i = 0; i < this.totalNum; i++) {
+        let pack = this.packupUserSelect(i);
+        let host = baseHost + `?id=` + pack.ProblemId;
+        this.axios.get(host)
+          .then(response => {
+            let result = Object.assign({}, response.data[0]) || {};
+            this.userResults.push(result.result);
+          })
+          .catch(e => {
+            console.log(e);
+          })
+      }
     },
 
     _expr: function (expr) {
@@ -78,6 +100,36 @@ export default {
       } catch (err) {
         return ""
       }
+    },
+
+    showSelectABCD(index) {
+      let option = this.userSelect[index];
+      return this.showABCD(option);
+    },
+
+    showAnswerABCD(index){
+        let option = this.questionAnswers[index];
+        return this.showABCD(option);
+    },
+
+    showABCD(option) {
+      switch (option) {
+        case "0":
+          return "A";
+          break;
+        case "1":
+          return "B";
+          break;
+        case "2":
+          return "C";
+          break;
+        case "3":
+          return "D";
+          break;
+        default:
+          return "error"
+
+      }
     }
   },
 
@@ -87,7 +139,8 @@ export default {
       'questions',
       'userSelect',
       'exam',
-      'totalNum'
+      'totalNum',
+      'questionsHead'
     ])
   }
 }
