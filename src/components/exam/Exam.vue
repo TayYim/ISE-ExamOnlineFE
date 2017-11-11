@@ -9,7 +9,7 @@
     </Col>
   </Row>
   <Row v-show="examSelected">
-      <ExamConfirm :exam="exam" @goBack="toggleSelected"></ExamConfirm>
+    <ExamConfirm :exam="exam" @goBack="toggleSelected"></ExamConfirm>
   </Row>
 </div>
 </template>
@@ -46,11 +46,11 @@ export default {
      * @param  {[String]} course_id
      */
     showExams(course_id) {
-      let host = this.baseUrl +  `subject`;
+      let host = this.baseUrl + `subject`;
       if (course_id !== '0') {
         host = host + `?course=` + course_id;
       }
-    //   get exam papers
+      //   get exam papers
       this.axios.get(host)
         .then(response => {
           this.exams = response.data;
@@ -59,19 +59,19 @@ export default {
           this.errors.push(e)
         })
     },
-    selectExam(exam){
-        this.toggleSelected();
-        this.exam = exam;
+    selectExam(exam) {
+      this.toggleSelected();
+      this.exam = exam;
     },
-    toggleSelected(){
-        this.examSelected = !this.examSelected;
+    toggleSelected() {
+      this.examSelected = !this.examSelected;
     }
-},
-computed:{
-    baseUrl(){
-        return this.$store.state.baseUrl;
+  },
+  computed: {
+    baseUrl() {
+      return this.$store.state.baseUrl;
     }
-}
+  }
 }
 </script>
 

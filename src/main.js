@@ -9,8 +9,8 @@ import 'iview/dist/styles/iview.css'
 Vue.use(iView);
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 import '../static/me.css'
+// import '../static/katex.css'
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'

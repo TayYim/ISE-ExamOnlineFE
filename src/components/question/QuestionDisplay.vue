@@ -1,7 +1,5 @@
 <template>
 <div id="QuestionDisplay">
-  <!-- <Button @click="fetchData">generate</Button>
-  <Button @click="showSelect">show select</Button> -->
   <div v-for="(question,index) in questions" v-if="currentSlide === index">
     <Row>
       <Col span="4">
@@ -9,21 +7,21 @@
       </Col>
       <Col span="14" align='left'>
       <div>
-        {{question.content}}
+        <span v-html="_expr(question.content)"></span>
       </div>
       <div>
-        <RadioGroup v-model="userSelect[index]" vertical>
+        <RadioGroup v-model="userSelect[index]" vertical class="options">
           <Radio label="A">
-            <span>{{question.options[0]}}</span>
+            <span v-html="_expr(question.options[0])"></span>
           </Radio>
           <Radio label="B">
-            <span>{{question.options[1]}}</span>
+            <span v-html="_expr(question.options[1])"></span>
           </Radio>
           <Radio label="C">
-            <span>{{question.options[2]}}</span>
+            <span v-html="_expr(question.options[2])"></span>
           </Radio>
           <Radio label="D">
-            <span>{{question.options[3]}}</span>
+            <span v-html="_expr(question.options[3])"></span>
           </Radio>
         </RadioGroup>
       </div>
@@ -56,15 +54,11 @@ export default {
   mounted() {
     //do something after mounting vue instance
     this.fetchData();
-    var me = this;
-    this.bus.$on('submitExam', function () {
-      me.showSelect();
-    })
   },
 
   methods: {
     fetchData() {
-      let host = this.baseUrl +  `paper`;
+      let host = this.baseUrl + `paper`;
       host = host + `?paperId=` + this.exam.id;
 
       this.axios.get(host)
@@ -80,11 +74,15 @@ export default {
             this.axios.get(host)
               .then(response => {
                 let question = response.data[0];
-                let {id,option,pro_detail} = question;
-                question={
-                    id:id,
-                    options:option,
-                    content:pro_detail
+                let {
+                  id,
+                  option,
+                  pro_detail
+                } = question;
+                question = {
+                  id: id,
+                  options: option,
+                  content: pro_detail
                 }
                 this.questions.push(question);
               })
@@ -107,10 +105,6 @@ export default {
       this.logQuestionsHead(this.questionsHead);
     },
 
-    showSelect() {
-      console.log(this.userSelect);
-    },
-
     prev() {
       this.currentSlide--;
     },
@@ -129,12 +123,28 @@ export default {
       'logQuestions',
       'logQuestionsHead'
     ]),
+
+    _expr: function(expr){
+      var _expr = expr.replace(/\s\s+/g, ' ').replace(/ /gi, "~");
+      try {
+        return katex.renderToString(_expr, {throwOnError: false});
+      } catch (err) {
+        return ""
+      }
+    }
   },
-  computed: mapState([
-    'exam',
-    'baseUrl'
-  ])
+
+  computed: {
+    ...mapState([
+      'exam',
+      'baseUrl'
+    ])
+  }
 }
 </script>
 <style lang="css" scoped>
+.options > *{
+    margin: 40px;
+    line-height: 2;
+}
 </style>

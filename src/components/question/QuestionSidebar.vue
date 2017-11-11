@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     submitExam() {
-      this.bus.$emit('submitExam')
+      console.log(this.userSelect);
     }
   },
   computed: {
