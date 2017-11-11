@@ -4,7 +4,7 @@
     <Button @click="">userResult</Button>
     <h1>{{exam.title}}</h1>
     <h2>{{exam.year}}</h2>
-    <h3>共{{totalNum}}题 你答对了2题</h3>
+    <h3>共{{totalNum}}题 你答对了{{totalCorrect}}题</h3>
     <hr>
     <div v-for="(question,index) in questions">
       <Row>
@@ -53,7 +53,8 @@ export default {
   data: () => ({
     userResults: [],
     questionAnswers: [],
-    userSelectPacks: []
+    userSelectPacks: [],
+    totalCorrect: 0
   }),
 
   mounted() {
@@ -63,7 +64,7 @@ export default {
 
   methods: {
     fetchData() {
-        this.fetchUserResult();
+      this.fetchUserResult();
     },
 
     packupUserSelect(index) {
@@ -84,6 +85,7 @@ export default {
           .then(response => {
             let result = Object.assign({}, response.data[0]) || {};
             this.userResults.push(result.result);
+            this.totalCorrect = this.totalCorrect + 1*result.result;
           })
           .catch(e => {
             console.log(e);
@@ -107,9 +109,9 @@ export default {
       return this.showABCD(option);
     },
 
-    showAnswerABCD(index){
-        let option = this.questionAnswers[index];
-        return this.showABCD(option);
+    showAnswerABCD(index) {
+      let option = this.questionAnswers[index];
+      return this.showABCD(option);
     },
 
     showABCD(option) {
