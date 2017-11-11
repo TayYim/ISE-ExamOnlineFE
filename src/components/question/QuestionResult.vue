@@ -1,7 +1,7 @@
 <template>
 <div id="QuestionDisplay">
   <div class="container">
-    <Button @click="fetchUserResult">userResult</Button>
+    <Button @click="">userResult</Button>
     <h1>{{exam.title}}</h1>
     <h2>{{exam.year}}</h2>
     <h3>共{{totalNum}}题 你答对了2题</h3>
@@ -27,7 +27,7 @@
       </Row>
       <Row class="explain">
         <Col span="8" offset="4" align="left">
-        <p>你的选择:{{showSelectABCD(index)}}</p>
+        <p v-bind:class="{correct: userResults[index], wrong: !userResults[index]}">你的选择:{{showSelectABCD(index)}}</p>
         <p>正确答案:B</p>
         <Collapse>
           <Panel name="1">
@@ -63,7 +63,7 @@ export default {
 
   methods: {
     fetchData() {
-
+        this.fetchUserResult();
     },
 
     packupUserSelect(index) {
@@ -145,6 +145,7 @@ export default {
   }
 }
 </script>
+
 <style lang="css" scoped>
 .options > *{
     margin: 40px;
@@ -153,5 +154,13 @@ export default {
 
 .explain{
     margin-bottom: 40px;
+}
+
+.correct{
+    color: green;
+}
+
+.wrong{
+    color: red;
 }
 </style>
