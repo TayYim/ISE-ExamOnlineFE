@@ -60,14 +60,19 @@ export default {
   mounted() {
     //do something after mounting vue instance
     this.fetchData();
-    this.fetchQuestionAnswers();
   },
 
   methods: {
     fetchData() {
       this.fetchUserResults();
+      this.fetchQuestionAnswers();
     },
 
+    /**
+     * Packup the question id and user select to send to the backend
+     * @param  {number} index array number
+     * @return {object}
+     */
     packupUserSelect(index) {
       let pack = {
         ProblemId: this.questionsHead[index].ProblemId,
@@ -76,6 +81,11 @@ export default {
       return pack;
     },
 
+    /**
+     * get exam result by question id and user select
+     * but only id is included here for test
+     * Need to be modified for formally use
+     */
     fetchUserResults() {
       let baseHost = this.baseUrl + `judge`;
 
@@ -94,6 +104,10 @@ export default {
       }
     },
 
+    /**
+     * fetch question answers by question id
+     * get questionAnswers array and correctOptions array
+     */
     fetchQuestionAnswers() {
       let baseHost = this.baseUrl + `answer`;
 
@@ -112,6 +126,11 @@ export default {
       }
     },
 
+    /**
+     * Katex transforn
+     * @param  {string} expr input string
+     * @return {string}      ouput string
+     */
     _expr: function (expr) {
       var _expr = expr.replace(/\s\s+/g, ' ').replace(/ /gi, "~");
       try {
@@ -123,13 +142,23 @@ export default {
       }
     },
 
+    /**
+     * Transform user select options from number to ABCD
+     * @param  {number} index array index
+     * @return {string}       A,B,C,D
+     */
     showSelectABCD(index) {
       let option = this.userSelect[index];
       return this.showABCD(option);
     },
 
+    /**
+     * Transform uitl
+     * @param  {number} option 0,1,2,3
+     * @return {string}        A,B,C,D
+     */
     showABCD(option) {
-    //   option = option.toString();
+      //   option = option.toString();
       switch (option) {
         case "0":
           return "A";
