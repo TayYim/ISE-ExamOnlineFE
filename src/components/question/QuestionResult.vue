@@ -37,6 +37,10 @@
         </Col>
       </Row>
     </div>
+    <div class="footer">
+        <router-link to="/"><Button size="large" type="info">返回首页</Button></router-link>
+        <router-link to="/exam"><Button size="large" type="info">继续刷题</Button></router-link>
+    </div>
   </div>
 </div>
 </template>
@@ -208,5 +212,9 @@ export default {
 
 .wrong{
     color: red;
+}
+
+.footer{
+    margin:50px;
 }
 </style>
