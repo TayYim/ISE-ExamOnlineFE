@@ -2,7 +2,8 @@
 <div id="QuestionDisplay">
   <!-- <Button @click="fetchData">generate</Button>
   <Button @click="showSelect">show select</Button> -->
-
+  {{count}}
+  <Button @click="test">plus</Button>
   <div v-for="(question,index) in questions" v-if="currentSlide === index">
     <Row>
       <Col span="4">
@@ -58,8 +59,8 @@ export default {
     this.bus.$on('submitExam', function () {
       me.showSelect();
     })
-    this.bus.$on('logExam',function(exam){
-        console.log(exam);
+    this.bus.$on('logExam', function (exam) {
+      console.log(exam);
     })
   },
 
@@ -104,8 +105,7 @@ export default {
 
     next() {
       this.currentSlide++;
-    }
-
+    },
   }
 }
 </script>
