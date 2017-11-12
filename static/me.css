@@ -138,3 +138,16 @@ body {
 .question-list .question-list-item .explain{
     margin-bottom : 10px;
 }
+
+/*utils*/
+
+.centerPage{
+    /*垂直居中*/
+    position:absolute;
+    width:200px;
+    height:200px;
+    top:40%;
+    left:50%;
+    margin-top:-100px;
+    margin-left:-100px;
+}

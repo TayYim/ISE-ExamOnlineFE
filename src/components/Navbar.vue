@@ -26,12 +26,17 @@
 
       </Col>
       <Col span="4" offset="8" v-if="!isLogged">
-      <Menu-item name="4">
-        <Button type="text" size="large" @click="toggleLogged">假登陆</Button>
-      </Menu-item>
-      <Menu-item name="5">
-        注册
-      </Menu-item>
+      <router-link to="/login">
+        <Menu-item name="4">
+          <!-- <Button type="text" size="large" @click="toggleLogged">假登陆</Button> -->
+          登陆
+        </Menu-item>
+      </router-link>
+      <router-link to="/register">
+        <Menu-item name="5">
+          注册
+        </Menu-item>
+      </router-link>
       </Col>
 
       <Col span="4" offset="8" v-if="isLogged">
@@ -47,7 +52,7 @@
         </Dropdown>
       </Menu-item>
       </Col>
-  </Row>
+    </Row>
   </Menu>
 </div>
 </template>

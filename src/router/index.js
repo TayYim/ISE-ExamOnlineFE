@@ -4,6 +4,8 @@ import Home from '@/components/Home'
 import Exam from '@/components/exam/Exam'
 import Question from '@/components/question/Question';
 import Collection from '@/components/collection/Collection';
+import Login from '@/components/user/Login';
+import Register from '@/components/user/Register';
 
 Vue.use(Router)
 
@@ -28,6 +30,16 @@ export default new Router({
       path: '/collection',
       name: 'collection',
       component: Collection
+  } ,
+  {
+      path: '/login',
+      name: 'login',
+      component:Login
+  },
+  {
+      path: '/register',
+      name: 'register',
+      component:Register
   }
   ]
 })

@@ -5,8 +5,8 @@
     <Button @click="" type="text">
           <Card style="width:200px">
             <div style="text-align:center">
-    <h3>{{single}}</h3>
-</div>
+                <h3>{{single}}</h3>
+            </div>
           </Card>
     </Button>
     </Col>

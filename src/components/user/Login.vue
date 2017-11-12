@@ -1,0 +1,96 @@
+<template>
+<div id="Login" class="centerPage">
+  <Card style="width:350px" align="left">
+    <div slot="title">
+
+      <h2><Icon type="log-in"></Icon> 登陆</h2>
+    </div>
+    <a slot="extra" @click.prevent="">
+      <router-link to="/register">
+        <Icon type="arrow-right-b"></Icon>
+        注册
+      </router-link>
+    </a>
+
+    <Form ref="formInline" :model="formInline" :rules="ruleInline">
+      <FormItem prop="user">
+        <Input type="text" v-model="formInline.user" placeholder="用户名/邮箱">
+        <Icon type="ios-person-outline" slot="prepend"></Icon>
+        </Input>
+      </FormItem>
+      <FormItem prop="password">
+        <Input type="password" v-model="formInline.password" placeholder="密码">
+        <Icon type="ios-locked-outline" slot="prepend"></Icon>
+        </Input>
+        <a type="text" @click="">忘记密码？</a>
+      </FormItem>
+      <FormItem>
+        <Button type="primary" long @click="handleSubmit('formInline')">登陆</Button>
+      </FormItem>
+    </Form>
+  </Card>
+</div>
+</template>
+<script>
+export default {
+  name: "Login",
+  data() {
+    return {
+      formInline: {
+        user: '',
+        password: ''
+      },
+      ruleInline: {
+        user: [{
+          required: true,
+          message: '请填写用户名或邮箱',
+          trigger: 'blur'
+        }],
+        password: [{
+            required: true,
+            message: '请输入密码',
+            trigger: 'blur'
+          },
+          {
+            type: 'string',
+            min: 6,
+            message: '密码长度不能小于6位',
+            trigger: 'blur'
+          }
+        ]
+      }
+    }
+  },
+  methods: {
+    handleSubmit(name) {
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          this.$Message.success('Success!');
+        } else {
+          this.$Message.error('Fail!');
+        }
+      })
+    }
+  }
+}
+</script>
+<style lang="css" scoped>
+#Login{
+    /*垂直居中*/
+    /*position:absolute;
+    width:200px;
+    height:200px;
+    top:50%;
+    left:50%;
+    margin-top:-100px;
+    margin-left:-100px;*/
+}
+
+#content{
+    /*clear: both;
+
+    height: 240px;
+
+    position: relative;*/
+}
+</style>

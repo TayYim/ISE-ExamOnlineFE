@@ -9,8 +9,8 @@
             <h1>真的刷题 刷出声</h1>
             <p>学习者的大事，大快所有人心的大好事</p>
             <div>
-              <router-link to="/"><a @click="toggleHomePage" disabled class="btn btn-home" href="#about" role="button">登陆/注册</a></router-link>
-              <router-link to="/exam"><a @click="toggleHomePage" class="btn btn-home" href="#about" role="button">即刻开始</a></router-link>
+              <router-link to="/login"><a @click="toggleHomePage" class="btn btn-home" role="button">登陆/注册</a></router-link>
+              <router-link to="/exam"><a @click="toggleHomePage" class="btn btn-home" role="button">即刻开始</a></router-link>
             </div>
           </div>
         </div>
