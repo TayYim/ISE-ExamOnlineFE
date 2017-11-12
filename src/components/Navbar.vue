@@ -1,6 +1,6 @@
 <template>
 <div id="Navbar" v-if="!isHomePage">
-  <Menu mode="horizontal" theme="light" active-name="1">
+  <Menu @on-select="gotoHomePage" mode="horizontal" theme="light" active-name="1">
     <Row>
       <Col span="12">
       <router-link to="/">
@@ -17,12 +17,12 @@
         <Menu-item name="2">
           刷题
         </Menu-item>
-    </router-link>
-    <router-link to="/collection">
+      </router-link>
+      <router-link to="/collection">
         <Menu-item name="3">
           题目收藏
         </Menu-item>
-  </router-link>
+      </router-link>
 
       </Col>
       <Col span="4" offset="8" v-if="!isLogged">
@@ -34,19 +34,22 @@
         注册
       </Menu-item>
       </Col>
+
       <Col span="4" offset="8" v-if="isLogged">
       <!-- //TBD resiponsive+ -->
       <Menu-item name="4" id="userItem">
         <Dropdown style="margin-left: 20px">
           <Button type="primary">
           {{userName}}
-      </Button>
+          </Button>
           <DropdownMenu slot="list">
             <DropdownItem><a @click="toggleLogged" href="javascript:void(0)">登出</a></DropdownItem>
           </DropdownMenu>
         </Dropdown>
+        <!-- <a @click="toggleLogged" href="javascript:void(0)">登出</a> -->
       </Menu-item>
       </Col>
+
     </Row>
   </Menu>
 </div>
@@ -74,8 +77,15 @@ export default {
 
   methods: {
     ...mapMutations([
-      'toggleLogged'
-    ])
+      'toggleLogged',
+      'toggleHomePage'
+    ]),
+    gotoHomePage(name) {
+      if (name === "0" || name === "1") {
+        this.toggleHomePage();
+        console.log('click'+name);
+      }
+    }
   }
 }
 </script>
@@ -94,6 +104,7 @@ export default {
 }
 
 #userItem{
-    border: 0;
+    /*border: 0;*/
+    border-color: rgba(255, 0, 0, 0.01);
 }
 </style>

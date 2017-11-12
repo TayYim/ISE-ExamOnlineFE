@@ -9,7 +9,7 @@
     </Col>
   </Row>
   <Row v-if="submitted">
-      <QuestionResult></QuestionResult>
+    <QuestionResult></QuestionResult>
   </Row>
 </div>
 </template>
