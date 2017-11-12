@@ -26,7 +26,6 @@
 
       </Col>
       <Col span="4" offset="8" v-if="!isLogged">
-      <!-- //TBD resiponsive+ -->
       <Menu-item name="4">
         <Button type="text" size="large" @click="toggleLogged">假登陆</Button>
       </Menu-item>
@@ -46,11 +45,9 @@
             <DropdownItem><a @click="toggleLogged" href="javascript:void(0)">登出</a></DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        <!-- <a @click="toggleLogged" href="javascript:void(0)">登出</a> -->
       </Menu-item>
       </Col>
-
-    </Row>
+  </Row>
   </Menu>
 </div>
 </template>
@@ -83,7 +80,7 @@ export default {
     gotoHomePage(name) {
       if (name === "0" || name === "1") {
         this.toggleHomePage();
-        console.log('click'+name);
+        console.log('click' + name);
       }
     }
   }

@@ -1,7 +1,14 @@
 <template>
 <div id="Exam" class="layout">
   <div class="layout-content">
-    <Row v-show="!examSelected">
+    <Menu @on-select="selectMode" v-show="!examSelected" mode="horizontal" active-name="1">
+      <div class="layout-assistant">
+        <MenuItem name="paperMode">选择套题</MenuItem>
+        <MenuItem name="randomMode">随机刷题</MenuItem>
+      </div>
+    </Menu>
+
+    <Row v-show="!examSelected && isPaperMode">
       <Col span="10">
       <ExamSidebar @getExams="showExams"></ExamSidebar>
       </Col>
@@ -9,6 +16,12 @@
       <ExamList :exams="exams" @selectExam="selectExam"></ExamList>
       </Col>
     </Row>
+
+    <Row v-show="!examSelected && !isPaperMode">
+        <h1>选择一个学科，马上开始刷题吧！</h1>
+        <ExamRandom></ExamRandom>
+    </Row>
+
     <div v-show="examSelected">
       <ExamConfirm :exam="exam" @goBack="toggleSelected"></ExamConfirm>
     </div>
@@ -23,6 +36,7 @@
 import ExamSidebar from '@/components/exam/ExamSidebar';
 import ExamList from '@/components/exam/ExamList';
 import ExamConfirm from '@/components/exam/ExamConfirm';
+import ExamRandom from '@/components/exam/ExamRandom';
 
 export default {
   name: "Exam",
@@ -31,13 +45,15 @@ export default {
       exams: [],
       errors: [],
       exam: {},
-      examSelected: false
+      examSelected: false,
+      isPaperMode: true
     }
   },
   components: {
     ExamSidebar,
     ExamList,
-    ExamConfirm
+    ExamConfirm,
+    ExamRandom
   },
 
   created() {
@@ -69,6 +85,13 @@ export default {
     },
     toggleSelected() {
       this.examSelected = !this.examSelected;
+    },
+    selectMode(name) {
+      if (name === "paperMode") {
+          this.isPaperMode = true;
+      }else {
+          this.isPaperMode = false;
+      }
     }
   },
   computed: {
@@ -80,45 +103,4 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.layout{
-    border: 1px solid #d7dde4;
-    background: #f5f7f9;
-}
-.layout-logo{
-    width: 100px;
-    height: 30px;
-    background: #5b6270;
-    border-radius: 3px;
-    float: left;
-    position: relative;
-    top: 15px;
-    left: 20px;
-}
-.layout-nav{
-    width: 420px;
-    margin: 0 auto;
-}
-.layout-assistant{
-    width: 300px;
-    margin: 0 auto;
-    height: inherit;
-}
-.layout-breadcrumb{
-    padding: 10px 15px 0;
-}
-.layout-content{
-    min-height: 200px;
-    margin: 15px;
-    overflow: hidden;
-    background: #fff;
-    border-radius: 4px;
-}
-.layout-content-main{
-    padding: 10px;
-}
-.layout-copy{
-    text-align: center;
-    padding: 10px 0 20px;
-    color: #9ea7b4;
-}
 </style>
