@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../static/me.css'
 
 Vue.use(VueAxios, axios)
-Vue.use(iView);
+Vue.use(iView)
 Vue.use(Vuex)
 
 const store = new Vuex.Store({

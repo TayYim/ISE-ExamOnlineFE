@@ -1,5 +1,6 @@
 <template>
 <div id="QuestionDisplay">
+    <!-- <Button @click="fetchUserResults">fetch</Button> -->
   <div class="container">
     <h1>{{exam.title}}</h1>
     <h2>{{exam.year}}</h2>
@@ -34,7 +35,7 @@
         <Collapse>
           <Panel name="1">
             查看解析：
-            <p slot="content">{{questionAnswers[index].explain}}</p>
+            <!-- <p slot="content">{{questionAnswers[index].explain}}</p> -->
           </Panel>
         </Collapse>
         </Col>
@@ -72,8 +73,8 @@ export default {
 
   methods: {
     fetchData() {
-      this.fetchUserResults();
       this.fetchQuestionAnswers();
+      this.fetchUserResults();
     },
 
     /**
@@ -95,21 +96,41 @@ export default {
      * Need to be modified for formally use
      */
     fetchUserResults() {
-      let baseHost = this.baseUrl + `judge`;
+      //   let baseHost = this.baseUrl + `judge`;
+      //
+      //   for (var i = 0; i < this.totalNum; i++) {
+      //     let pack = this.packupUserSelect(i);
+      //     let host = baseHost + `?id=` + pack.ProblemId;
+      //     this.axios.get(host)
+      //       .then(response => {
+      //         let result = Object.assign({}, response.data[0]) || {};
+      //         this.userResults.push(result.result);
+      //         this.totalCorrect = this.totalCorrect + 1 * result.result;
+      //       })
+      //       .catch(e => {
+      //         console.log(e);
+      //       })
+      //   }
+    //   for (var i = 0; i < this.totalNum; i++) {
+    //     // let result = (this.showSelectABCD(i) === this.correctOptions[i]);
+    //     console.log(me.correctOptions);
+    //     // this.totalCorrect = this.totalCorrect + 1 * result;
+    //     // this.userResults.push(result);
+    //     // console.log(this.showSelectABCD(i) + "," + this.correctOptions[i]);
+    //   }
+        // for (let item of this.correctOptions) {
+        //     console.log(item);
+        // }
 
-      for (var i = 0; i < this.totalNum; i++) {
-        let pack = this.packupUserSelect(i);
-        let host = baseHost + `?id=` + pack.ProblemId;
-        this.axios.get(host)
-          .then(response => {
-            let result = Object.assign({}, response.data[0]) || {};
-            this.userResults.push(result.result);
-            this.totalCorrect = this.totalCorrect + 1 * result.result;
-          })
-          .catch(e => {
-            console.log(e);
-          })
-      }
+        var i =0;
+        let result = false;
+        for (let item of this.correctOptions) {
+            result = (item == this.showSelectABCD(i));
+            console.log(result);
+            this.$set(this.userResults,i,result);
+            this.totalCorrect = this.totalCorrect + 1 * result;
+            i++;
+        }
     },
 
     /**
