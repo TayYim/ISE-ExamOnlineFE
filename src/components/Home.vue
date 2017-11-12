@@ -73,12 +73,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-#Home{
-    /*margin-top: 50px;*/
-}
-
-
-
 .btn {
   border-radius: 0; }
 
@@ -93,9 +87,6 @@ export default {
     background-color: #fff;
     color: #555;
     border: 1px solid #fff; }
-
-
-
 
     /*--
         .hero-area start ！！mark

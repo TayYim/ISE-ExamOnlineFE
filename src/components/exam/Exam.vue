@@ -38,7 +38,6 @@ export default {
   },
 
   created() {
-    //do sshowExams("0");omething after mounting vue instance
     this.showExams('0');
   },
 

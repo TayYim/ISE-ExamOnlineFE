@@ -3,19 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
-Vue.use(iView);
-
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import Vuex from 'vuex'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../static/me.css'
 
-import axios from 'axios'
-import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
-
-import Vuex from 'vuex'
+Vue.use(iView);
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -68,9 +65,6 @@ const store = new Vuex.Store({
 })
 
 Vue.config.productionTip = false
-
-Vue.prototype.bus = new Vue()
-
 
 /* eslint-disable no-new */
 new Vue({

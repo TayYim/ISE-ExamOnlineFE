@@ -30,7 +30,6 @@ export default {
     },
     beginExam() {
       let {id,paper_title:title,paper_year:year} = this.exam;
-    //   this.bus.$emit('logExam',{'id':id,'title':title,'year':year});
       this.$store.commit('logExam',{'id':id,'title':title,'year':year});
   }
   }

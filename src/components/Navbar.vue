@@ -48,6 +48,7 @@
   </Menu>
 </div>
 </template>
+
 <script>
 import {
   mapState,
