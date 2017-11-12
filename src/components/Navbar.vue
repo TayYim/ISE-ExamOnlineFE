@@ -1,25 +1,25 @@
 <template>
 <div id="Navbar" v-if="!isHomePage">
-  <Menu @on-select="gotoHomePage" mode="horizontal" theme="light" active-name="1">
+  <Menu @on-select="gotoHomePage" mode="horizontal" theme="light" :active-name="activeName">
     <Row>
       <Col span="12">
       <router-link to="/">
-        <Menu-item id="brand" name="0">
+        <Menu-item id="brand" name="brand">
           刷题吧！
         </Menu-item>
       </router-link>
       <router-link to="/">
-        <Menu-item name="1">
+        <Menu-item name="home">
           首页
         </Menu-item>
       </router-link>
       <router-link to="/exam">
-        <Menu-item name="2">
+        <Menu-item name="exam">
           刷题
         </Menu-item>
       </router-link>
       <router-link to="/collection">
-        <Menu-item name="3">
+        <Menu-item name="collection">
           题目收藏
         </Menu-item>
       </router-link>
@@ -27,13 +27,13 @@
       </Col>
       <Col span="4" offset="8" v-if="!isLogged">
       <router-link to="/login">
-        <Menu-item name="4">
+        <Menu-item name="login">
           <!-- <Button type="text" size="large" @click="toggleLogged">假登陆</Button> -->
           登陆
         </Menu-item>
       </router-link>
       <router-link to="/register">
-        <Menu-item name="5">
+        <Menu-item name="register">
           注册
         </Menu-item>
       </router-link>
@@ -66,7 +66,7 @@ import {
 export default {
   name: "Navbar",
   data: () => ({
-
+      activeName: "login"
   }),
 
   computed: {
