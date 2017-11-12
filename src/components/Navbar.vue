@@ -1,5 +1,5 @@
 <template>
-<div id="Navbar">
+<div id="Navbar" v-if="!isHomePage">
   <Menu mode="horizontal" theme="light" active-name="1">
     <Row>
       <Col span="12">
@@ -33,7 +33,7 @@
       </Col>
       <Col span="4" offset="8" v-if="isLogged">
       <!-- //TBD resiponsive+ -->
-      <Menu-item name="4">
+      <Menu-item name="4" id="userItem">
         <Dropdown style="margin-left: 20px">
           <Button type="primary">
           {{userName}}
@@ -64,7 +64,8 @@ export default {
   computed: {
     ...mapState([
       'userName',
-      'isLogged'
+      'isLogged',
+      'isHomePage'
     ])
   },
 
@@ -87,5 +88,9 @@ export default {
     color: #464c5b;
     font-family: "Hiragino Sans GB";
     font-weight: bold;
+}
+
+#userItem{
+    border: 0;
 }
 </style>

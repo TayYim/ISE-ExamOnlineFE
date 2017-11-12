@@ -142,7 +142,7 @@ export default {
           throwOnError: false
         });
       } catch (err) {
-        return ""
+        return expr
       }
     },
 

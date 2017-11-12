@@ -13,7 +13,6 @@
 </div>
 </template>
 <script>
-
 import {
   mapState
 } from 'vuex'
@@ -29,11 +28,22 @@ export default {
       this.$emit('goBack');
     },
     beginExam() {
-      let {id,paper_title:title,paper_year:year} = this.exam;
-      this.$store.commit('logExam',{'id':id,'title':title,'year':year});
-  }
+      let {
+        id,
+        paper_title: title,
+        paper_year: year
+      } = this.exam;
+      this.$store.commit('logExam', {
+        'id': id,
+        'title': title,
+        'year': year
+      });
+    }
   }
 }
 </script>
 <style lang="css" scoped>
+#ExamConfirm{
+    margin-top: 100px;
+}
 </style>

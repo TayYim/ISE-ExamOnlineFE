@@ -125,7 +125,7 @@ export default {
       try {
         return katex.renderToString(_expr, {throwOnError: false});
       } catch (err) {
-        return ""
+        return expr
       }
     }
   },

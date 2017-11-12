@@ -2,8 +2,18 @@
 <div id="QuestionSidebar">
   <h1>{{exam.title}}</h1>
   <h2>{{exam.year}}</h2>
-  <h3>共{{totalNum}}题 已作答{{userDone}}题</h3>
-  <Button type="success" size="large" @click="submitExam">交卷</Button>
+  <div id="circle">
+      <i-circle :percent="donePercent" :stroke-color="circleColor">
+          <div v-if="userDone!==totalNum">
+              <p class="demo-Circle-inner" style="font-size:24px">共{{totalNum}}题</p>
+              <p class="demo-Circle-inner" style="font-size:20px">已答{{userDone}}题</p>
+          </div>
+          <div v-else>
+              <Icon type="ios-checkmark-empty" size="60" style="color:#5cb85c"></Icon>
+          </div>
+      </i-circle>
+  </div>
+  <Button type="default" size="large" @click="submitExam">交卷</Button>
   <Modal v-model="isDone" title="交卷" @on-ok="ok" align='center'>
     <strong>您已完成所有问题,</strong>
     <strong>确定要交卷吗？</strong>
@@ -50,12 +60,27 @@ export default {
     ]),
     userDone() {
       return this.$store.getters.userDone;
+    },
+    donePercent() {
+      return (this.userDone / this.totalNum) * 100;
+    },
+    circleColor() {
+      if (this.userDone === this.totalNum) {
+        return "#5cb85c";
+      } else {
+        return "#2d8cf0";
+      }
     }
   }
 }
 </script>
 <style lang="css" scoped>
 #QuestionSidebar{
+    margin-top: 40px;
+    line-height: 5;
+}
+
+#circle{
     margin-top: 40px;
 }
 </style>
