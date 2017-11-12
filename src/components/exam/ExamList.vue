@@ -37,5 +37,6 @@ export default {
 <style lang="css" scoped>
 #ExamList{
     margin-top: 40px;
+    min-height: 1000px;
 }
 </style>

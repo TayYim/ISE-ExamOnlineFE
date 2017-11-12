@@ -9,6 +9,9 @@
       <Row>
         <Col span="4">
         <strong>{{index+1}}.</strong>
+        <p>
+          <Button size="small" type="ghost">收藏此题</Button>
+        </p>
         </Col>
         <Col span="14" align='left'>
         <div>
@@ -38,8 +41,9 @@
       </Row>
     </div>
     <div class="footer">
-        <router-link to="/"><Button size="large" type="info">返回首页</Button></router-link>
-        <router-link to="/exam"><Button size="large" type="info">继续刷题</Button></router-link>
+      <router-link to="/exam">
+        <Button size="large" type="info">完成</Button>
+      </router-link>
     </div>
   </div>
 </div>

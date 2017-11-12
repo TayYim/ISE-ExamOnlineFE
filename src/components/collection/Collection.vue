@@ -1,12 +1,12 @@
 <template>
-<div id="Exam" class="layout">
+<div id="Collection" class="layout">
   <div class="layout-content">
     <Row v-show="!examSelected">
       <Col span="10">
-      <ExamSidebar @getExams="showExams"></ExamSidebar>
+      <CollectionSidebar @getExams="showExams"></CollectionSidebar>
       </Col>
       <Col span="14">
-      <ExamList :exams="exams" @selectExam="selectExam"></ExamList>
+      <CollectionList :exams="exams" @selectExam="selectExam"></CollectionList>
       </Col>
     </Row>
     <div v-show="examSelected">
@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import ExamSidebar from '@/components/exam/ExamSidebar';
-import ExamList from '@/components/exam/ExamList';
+import CollectionSidebar from '@/components/collection/CollectionSidebar';
+import CollectionList from '@/components/collection/CollectionList';
 import ExamConfirm from '@/components/exam/ExamConfirm';
 
 export default {
-  name: "Exam",
+  name: "Collection",
   data() {
     return {
       exams: [],
@@ -35,8 +35,8 @@ export default {
     }
   },
   components: {
-    ExamSidebar,
-    ExamList,
+    CollectionSidebar,
+    CollectionList,
     ExamConfirm
   },
 

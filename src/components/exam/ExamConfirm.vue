@@ -45,5 +45,6 @@ export default {
 <style lang="css" scoped>
 #ExamConfirm{
     margin-top: 100px;
+    min-height: 1000px;
 }
 </style>

@@ -17,10 +17,13 @@
         <Menu-item name="2">
           刷题
         </Menu-item>
-      </router-link>
-      <Menu-item name="3">
-        题目收藏
-      </Menu-item>
+    </router-link>
+    <router-link to="/collection">
+        <Menu-item name="3">
+          题目收藏
+        </Menu-item>
+  </router-link>
+
       </Col>
       <Col span="4" offset="8" v-if="!isLogged">
       <!-- //TBD resiponsive+ -->
@@ -79,7 +82,7 @@ export default {
 
 <style lang="css" scoped>
 #Navbar{
-    margin-bottom: 2px;
+    margin-bottom: 0;
 }
 
 #brand{
