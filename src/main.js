@@ -67,6 +67,17 @@ const store = new Vuex.Store({
       return state.userSelect.filter(select => select).length;
     }
   }
+});
+
+/**
+ * login first before enter the collection
+ */
+router.beforeEach(function(to,from,next){
+    if (!store.isLogged && to.name === "collection") {
+        next('login')
+    }else {
+        next();
+    }
 })
 
 Vue.config.productionTip = false

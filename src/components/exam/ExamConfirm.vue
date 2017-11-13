@@ -23,6 +23,22 @@ export default {
 
   props: ['exam'],
 
+  beforeUpdate() {
+    //do something before updating vue instance
+    console.log(this.isLogged);
+    if (!this.isLogged) {
+      this.$router.push("login")
+    }
+  },
+
+  // function (to, from, next) {
+  //   if (!this.isLogged) {
+  //     next("login")
+  //   } else {
+  //     next();
+  //   }
+  // },
+
   methods: {
     goBack() {
       this.$emit('goBack');
@@ -39,6 +55,12 @@ export default {
         'year': year
       });
     }
+  },
+
+  computed: {
+    ...mapState([
+      'isLogged'
+    ])
   }
 }
 </script>
