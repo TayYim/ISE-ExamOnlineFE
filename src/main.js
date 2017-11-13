@@ -8,12 +8,14 @@ import 'iview/dist/styles/iview.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
+import VueParticles from 'vue-particles'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../static/me.css'
 
 Vue.use(VueAxios, axios)
 Vue.use(iView)
 Vue.use(Vuex)
+Vue.use(VueParticles)
 
 const store = new Vuex.Store({
   state: {
