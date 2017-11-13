@@ -12,20 +12,20 @@
       </router-link>
     </a>
 
-    <Form ref="formInline" :model="formInline" :rules="ruleInline">
+    <Form ref="form" :model="form" :rules="rule">
       <FormItem prop="user">
-        <Input type="text" v-model="formInline.user" placeholder="用户名/邮箱">
+        <Input type="text" v-model="form.user" placeholder="用户名/邮箱">
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem prop="password">
-        <Input type="password" v-model="formInline.password" placeholder="密码">
+        <Input type="password" v-model="form.password" placeholder="密码">
         <Icon type="ios-locked-outline" slot="prepend"></Icon>
         </Input>
         <a type="text" @click="">忘记密码？</a>
       </FormItem>
       <FormItem>
-        <Button type="primary" long @click="handleSubmit('formInline')">登陆</Button>
+        <Button type="primary" long @click="handleSubmit('form')">登陆</Button>
       </FormItem>
     </Form>
   </Card>
@@ -40,11 +40,11 @@ export default {
   name: "Login",
   data() {
     return {
-      formInline: {
+      form: {
         user: '',
         password: ''
       },
-      ruleInline: {
+      rule: {
         user: [{
           required: true,
           message: '请填写用户名或邮箱',
@@ -57,8 +57,9 @@ export default {
           },
           {
             type: 'string',
-            min: 6,
-            message: '密码长度不能小于6位',
+            min: 8,
+            max: 30,
+            message: '请输入8～30位的密码',
             trigger: 'blur'
           }
         ]

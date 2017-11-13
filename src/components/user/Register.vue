@@ -11,30 +11,30 @@
         登陆
       </router-link>
     </a>
-    <Form ref="formInline" :model="formInline" :rules="ruleInline">
+    <Form ref="form" :model="form" :rules="rule">
       <FormItem prop="username">
-        <Input type="text" v-model="formInline.user" placeholder="用户名">
+        <Input type="text" v-model="form.username" placeholder="用户名">
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem prop="useremail" id="chaptchaBtn">
-        <Input type="text" v-model="formInline.user" placeholder="邮箱">
+        <Input type="text" v-model="form.useremail" placeholder="邮箱">
         <Icon type="ios-email-outline" slot="prepend"></Icon>
         </Input>
         <a type="text" @click="">发送验证码</a>
       </FormItem>
       <FormItem prop="chaptcha">
-        <Input type="text" v-model="formInline.user" placeholder="验证码">
+        <Input type="text" v-model="form.chaptcha" placeholder="验证码">
         <Icon type="ios-ionic-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem prop="password">
-        <Input type="password" v-model="formInline.password" placeholder="密码">
+        <Input type="password" v-model="form.password" placeholder="密码">
         <Icon type="ios-locked-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem>
-        <Button type="primary" long @click="handleSubmit('formInline')">注册</Button>
+        <Button type="primary" long @click="handleSubmit('form')">注册</Button>
       </FormItem>
     </Form>
   </Card>
@@ -49,19 +49,29 @@ export default {
   name: "Register",
   data() {
     return {
-      formInline: {
-        user: '',
+      form: {
+        username: '',
+        useremail: '',
+        chaptcha: '',
         password: ''
       },
-      ruleInline: {
+      rule: {
         username: [{
           required: true,
           message: '请填写用户名',
+          trigger: 'blur'
+        }, {
+          pattern: /^[\u4E00-\u9FA5A-Za-z0-9_]+$/,
+          message: '请不要输入^%&\',;=?$\\"等字符',
           trigger: 'blur'
         }],
         useremail: [{
           required: true,
           message: '请填写邮箱',
+          trigger: 'blur'
+        }, , {
+          type: 'email',
+          message: '请输入正确的邮箱地址',
           trigger: 'blur'
         }],
         password: [{
@@ -71,8 +81,9 @@ export default {
           },
           {
             type: 'string',
-            min: 6,
-            message: '密码长度不能小于6位',
+            min: 8,
+            max: 30,
+            message: '请输入8～30位的密码',
             trigger: 'blur'
           }
         ],
@@ -113,8 +124,8 @@ export default {
 </script>
 <style lang="css" scoped>
 #chaptchaBtn{
-    margin-bottom: 0;
+    /*margin-bottom: 0;
     padding-bottom: 0;
-    border-bottom: 0;
+    border-bottom: 0;*/
 }
 </style>
