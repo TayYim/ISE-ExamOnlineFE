@@ -18,8 +18,8 @@
     </Row>
 
     <Row v-show="!examSelected && !isPaperMode">
-        <h1>选择一个学科，马上开始刷题吧！</h1>
-        <ExamRandom></ExamRandom>
+      <h1>选择一个学科，马上开始刷题吧！</h1>
+      <ExamRandom></ExamRandom>
     </Row>
 
     <div v-show="examSelected">
@@ -37,6 +37,9 @@ import ExamSidebar from '@/components/exam/ExamSidebar';
 import ExamList from '@/components/exam/ExamList';
 import ExamConfirm from '@/components/exam/ExamConfirm';
 import ExamRandom from '@/components/exam/ExamRandom';
+
+import {mapState} from 'vuex';
+import {mapMutations} from 'vuex';
 
 export default {
   name: "Exam",
@@ -58,6 +61,16 @@ export default {
 
   created() {
     this.showExams('0');
+  },
+
+  /**
+   * set current page to this page
+   */
+  beforeRouteEnter: function (to, from, next) {
+    console.log('examok');
+    next(Exam => {
+      Exam.setCurrentPage('exam');
+    });
   },
 
   methods: {
@@ -88,16 +101,19 @@ export default {
     },
     selectMode(name) {
       if (name === "paperMode") {
-          this.isPaperMode = true;
-      }else {
-          this.isPaperMode = false;
+        this.isPaperMode = true;
+      } else {
+        this.isPaperMode = false;
       }
-    }
+    },
+    ...mapMutations([
+      'setCurrentPage',
+    ])
   },
   computed: {
-    baseUrl() {
-      return this.$store.state.baseUrl;
-    }
+    ...mapState([
+      'baseUrl'
+    ])
   }
 }
 </script>

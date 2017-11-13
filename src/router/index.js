@@ -44,44 +44,4 @@ var router = new Router({
   ]
 });
 
-router.afterEach((to, from) => {
-  console.log(to.name);
-  console.log(from.name);
-});
-
 export default router
-
-// export default new Router({
-//   routes: [
-//     {
-//       path: '/',
-//       name: 'home',
-//       component: Home
-//   },
-//   {
-//       path: '/exam',
-//       name: 'exam',
-//       component: Exam
-//   },
-//   {
-//       path: '/question',
-//       name: 'question',
-//       component: Question
-//   },
-//   {
-//       path: '/collection',
-//       name: 'collection',
-//       component: Collection
-//   } ,
-//   {
-//       path: '/login',
-//       name: 'login',
-//       component:Login
-//   },
-//   {
-//       path: '/register',
-//       name: 'register',
-//       component:Register
-//   }
-// ]
-// })

@@ -32,6 +32,10 @@
 </div>
 </template>
 <script>
+import {
+  mapMutations
+} from 'vuex';
+
 export default {
   name: "Login",
   data() {
@@ -61,6 +65,17 @@ export default {
       }
     }
   },
+
+  /**
+   * set current page to this page
+   */
+  beforeRouteEnter: function (to, from, next) {
+    console.log('loginok');
+    next(Login => {
+      Login.setCurrentPage('login');
+    });
+  },
+
   methods: {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
@@ -70,7 +85,10 @@ export default {
           this.$Message.error('Fail!');
         }
       })
-    }
+    },
+    ...mapMutations([
+      'setCurrentPage',
+    ])
   }
 }
 </script>

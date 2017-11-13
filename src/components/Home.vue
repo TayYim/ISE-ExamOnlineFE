@@ -75,9 +75,21 @@ export default {
   data: () => ({
 
   }),
+
+  /**
+   * set current page to this page
+   */
+  beforeRouteEnter: function (to, from, next) {
+    console.log('homeok');
+    next(Home => {
+      Home.setCurrentPage('home');
+    });
+  },
+
   methods: {
     ...mapMutations([
-      'toggleHomePage'
+      'toggleHomePage',
+      'setCurrentPage'
     ])
   }
 }

@@ -18,16 +18,33 @@ import QuestionSidebar from '@/components/question/QuestionSidebar';
 import QuestionDisplay from '@/components/question/QuestionDisplay';
 import QuestionResult from '@/components/question/QuestionResult';
 
+import {
+  mapMutations
+} from 'vuex';
+
 export default {
   name: "Question",
   data: () => ({
     submitted: false
   }),
 
+  /**
+   * set current page to this page
+   */
+  beforeRouteEnter: function (to, from, next) {
+    console.log('questionok');
+    next(Question => {
+      Question.setCurrentPage('question');
+    });
+  },
+
   methods: {
     toggleSubmitted() {
       this.submitted = !this.submitted;
-    }
+    },
+    ...mapMutations([
+      'setCurrentPage',
+    ])
   },
 
   components: {

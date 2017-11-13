@@ -41,6 +41,10 @@
 </div>
 </template>
 <script>
+import {
+  mapMutations
+} from 'vuex';
+
 export default {
   name: "Register",
   data() {
@@ -80,6 +84,17 @@ export default {
       }
     }
   },
+
+  /**
+   * set current page to this page
+   */
+  beforeRouteEnter: function (to, from, next) {
+    console.log('registerok');
+    next(Register => {
+      Register.setCurrentPage('register');
+    });
+  },
+
   methods: {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
@@ -89,7 +104,10 @@ export default {
           this.$Message.error('Fail!');
         }
       })
-    }
+    },
+    ...mapMutations([
+      'setCurrentPage',
+    ])
   }
 }
 </script>

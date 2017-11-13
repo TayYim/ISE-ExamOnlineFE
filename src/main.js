@@ -30,7 +30,7 @@ const store = new Vuex.Store({
     userName: "admin",
     userEmail: "admin@qq.com",
     isLogged: false,
-    isHomePage: true
+    currentPage: "home"
   },
   mutations: {
     logExam(state,exam){
@@ -57,9 +57,9 @@ const store = new Vuex.Store({
     toggleLogged(state){
       state.isLogged = !state.isLogged;
   },
-    toggleHomePage(state){
-      state.isHomePage = !state.isHomePage;
-      console.log(state.isHomePage);
+    setCurrentPage(state,name){
+      state.currentPage = name;
+      console.log(state.currentPage);
   }
   },
   getters: {

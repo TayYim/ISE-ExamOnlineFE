@@ -1,6 +1,6 @@
 <template>
 <div id="Navbar" v-if="!isHomePage">
-  <Menu @on-select="gotoHomePage" mode="horizontal" theme="light" :active-name="activeName">
+  <Menu @on-select="gotoHomePage" mode="horizontal" theme="light" :active-name="currentPage">
     <Row>
       <Col span="12">
       <router-link to="/">
@@ -65,16 +65,17 @@ import {
 
 export default {
   name: "Navbar",
-  data: () => ({
-      activeName: "login"
-  }),
+  data: () => ({}),
 
   computed: {
     ...mapState([
       'userName',
       'isLogged',
-      'isHomePage'
-    ])
+      'currentPage'
+    ]),
+    isHomePage() {
+      return (this.currentPage === "home")
+    }
   },
 
   methods: {
