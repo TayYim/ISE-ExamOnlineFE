@@ -4,7 +4,7 @@
     <Menu @on-select="getExams($event)" theme="light" active-name="0">
       <Row>
         <Col span="12">
-        <Menu-item name="0">全部</Menu-item>
+        <Menu-item name="-1">全部</Menu-item>
         <Menu-item name="1">高等数学</Menu-item>
         <Menu-item name="2">软工导论</Menu-item>
         </Col>

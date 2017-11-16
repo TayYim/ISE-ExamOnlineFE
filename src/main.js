@@ -17,13 +17,14 @@ Vue.use(iView)
 Vue.use(Vuex)
 Vue.use(VueParticles)
 
+axios.defaults.baseURL = 'http://localhost:3000';
+
 const store = new Vuex.Store({
   state: {
-    baseUrl: `http://localhost:3000/`,
-    exam:{
-        id: 0,
-        title: "",
-        year: ""
+    exam: {
+      id: 0,
+      title: "",
+      year: ""
     },
     totalNum: 0,
     userSelect: [],
@@ -35,34 +36,34 @@ const store = new Vuex.Store({
     currentPage: "home"
   },
   mutations: {
-    logExam(state,exam){
+    logExam(state, exam) {
       state.exam = exam;
-  },
-    logTotalNum(state,totalNum){
+    },
+    logTotalNum(state, totalNum) {
       state.totalNum = totalNum;
-  },
-    logUserSelect(state,userSelect){
+    },
+    logUserSelect(state, userSelect) {
       state.userSelect = userSelect;
-  },
-    logQuestions(state,questions){
+    },
+    logQuestions(state, questions) {
       state.questions = questions;
-  },
-    logQuestionsHead(state,questionsHead){
+    },
+    logQuestionsHead(state, questionsHead) {
       state.questionsHead = questionsHead;
-  },
-    setUserName(state,userName){
+    },
+    setUserName(state, userName) {
       state.userName = userName;
-  },
-    setUseEmail(state,useEmail){
+    },
+    setUseEmail(state, useEmail) {
       state.useEmail = useEmail;
-  },
-    toggleLogged(state){
+    },
+    toggleLogged(state) {
       state.isLogged = !state.isLogged;
-  },
-    setCurrentPage(state,name){
+    },
+    setCurrentPage(state, name) {
       state.currentPage = name;
       console.log(state.currentPage);
-  }
+    }
   },
   getters: {
     userDone: state => {
@@ -74,21 +75,17 @@ const store = new Vuex.Store({
 /**
  * login first before enter the collection
  */
-router.beforeEach(function(to,from,next){
-    if (!store.isLogged && to.name === "collection") {
-        next('login')
-    }else {
-        next();
-    }
+router.beforeEach(function(to, from, next) {
+  if (!store.isLogged && to.name === "collection") {
+    next('login')
+  } else {
+    next();
+  }
 })
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  store,
-  router,
-  template: '<App/>',
-  components: { App }
-})
+new Vue({el: '#app', store, router, template: '<App/>', components: {
+    App
+  }})

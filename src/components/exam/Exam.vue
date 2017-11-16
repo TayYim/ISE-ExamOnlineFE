@@ -38,8 +38,12 @@ import ExamList from '@/components/exam/ExamList';
 import ExamConfirm from '@/components/exam/ExamConfirm';
 import ExamRandom from '@/components/exam/ExamRandom';
 
-import {mapState} from 'vuex';
-import {mapMutations} from 'vuex';
+import {
+  mapState
+} from 'vuex';
+import {
+  mapMutations
+} from 'vuex';
 
 export default {
   name: "Exam",
@@ -60,7 +64,7 @@ export default {
   },
 
   created() {
-    this.showExams('0');
+    this.showExams('-1');
   },
 
   /**
@@ -79,12 +83,13 @@ export default {
      * @param  {[String]} course_id
      */
     showExams(course_id) {
-      let host = this.baseUrl + `subject`;
-      if (course_id !== '0') {
-        host = host + `?course=` + course_id;
-      }
-      //   get exam papers
-      this.axios.get(host)
+      this.axios({
+          method: 'get',
+          url: '/course',
+          params: {
+            course: course_id
+          }
+        })
         .then(response => {
           this.exams = response.data;
         })
@@ -92,6 +97,7 @@ export default {
           this.errors.push(e)
         })
     },
+
     selectExam(exam) {
       this.toggleSelected();
       this.exam = exam;
@@ -108,11 +114,6 @@ export default {
     },
     ...mapMutations([
       'setCurrentPage',
-    ])
-  },
-  computed: {
-    ...mapState([
-      'baseUrl'
     ])
   }
 }
