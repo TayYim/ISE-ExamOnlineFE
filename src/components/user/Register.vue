@@ -34,6 +34,11 @@
           <Icon type="ios-locked-outline" slot="prepend"></Icon>
           </Input>
         </FormItem>
+        <FormItem prop="passwordcheck">
+          <Input type="password" v-model="form.passwordcheck" placeholder="再次输入密码">
+          <Icon type="ios-locked-outline" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
         <FormItem>
           <Button type="primary" long @click="handleSubmit('form')">注册</Button>
         </FormItem>
@@ -51,12 +56,26 @@ import {
 export default {
   name: "Register",
   data() {
+    /**
+     * check password
+     * ref:https://www.iviewui.com/docs/guide/install
+     */
+    const validatePassCheck = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请您再次输入密码'));
+      } else if (value !== this.form.password) {
+        callback(new Error('两次输入的密码不匹配'));
+      } else {
+        callback();
+      }
+    };
     return {
       form: {
         username: '',
         useremail: '',
         chaptcha: '',
-        password: ''
+        password: '',
+        passwordcheck: ''
       },
       rule: {
         username: [{
@@ -95,6 +114,10 @@ export default {
           message: '请填写验证码',
           trigger: 'blur'
         }],
+        passwordcheck: [{
+          validator: validatePassCheck,
+          trigger: 'blur'
+        }]
       }
     }
   },
