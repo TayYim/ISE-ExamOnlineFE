@@ -17,7 +17,7 @@ Vue.use(iView)
 Vue.use(Vuex)
 Vue.use(VueParticles)
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'http://45.32.66.148:8000';
 
 const store = new Vuex.Store({
   state: {
@@ -32,7 +32,7 @@ const store = new Vuex.Store({
     questionsHead: [],
     userName: "admin",
     userEmail: "admin@qq.com",
-    isLogged: false,
+    isLogged: true,
     currentPage: "home"
   },
   mutations: {

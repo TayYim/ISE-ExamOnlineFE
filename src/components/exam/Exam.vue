@@ -85,15 +85,18 @@ export default {
     showExams(course_id) {
       this.axios({
           method: 'get',
-          url: '/course',
+          url: '/course/course/',
           params: {
-            course: course_id
+            course: 5
           }
         })
         .then(response => {
           this.exams = response.data;
+          console.log(response.data);
+          console.log(this.exams);
         })
         .catch(e => {
+            console.log('failed');
           this.errors.push(e)
         })
     },
