@@ -36,7 +36,7 @@ export default {
   //       courseType: subjectId
   //     }
   //   }).then(response => {
-  //     _collection = reponse.data;
+  //     _collection = response.data;
   //   }).catch(e => {
   //     console.log('err');
   //   });

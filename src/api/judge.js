@@ -44,7 +44,7 @@ export default {
   //       Problems: answerSheet
   //     }
   //   }).then(response => {
-  //     _judge = reponse.data;
+  //     _judge = response.data;
   //   }).catch(e => {
   //     console.log('err');
   //   });

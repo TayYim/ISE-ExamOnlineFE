@@ -47,7 +47,7 @@
           {{name}}
           </Button>
           <DropdownMenu slot="list">
-            <DropdownItem><a @click="toggleLogged" href="javascript:void(0)">登出</a></DropdownItem>
+            <DropdownItem><a @click="toggleLogout" href="javascript:void(0)">登出</a></DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Menu-item>
@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import utils from '@/api/utils'
+
 import {
   mapState,
   mapMutations
@@ -90,6 +92,10 @@ export default {
         this.toggleHomePage();
         console.log('click' + name);
       }
+    },
+    toggleLogout() {
+        this.toggleLogged();
+        utils.logout(this.name);
     }
   }
 }

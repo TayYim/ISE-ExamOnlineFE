@@ -15,13 +15,14 @@ function login(user, password) {
       success;
 
     axios({method: 'post', url: '/user/login/', data: pack}).then(response => {
-      name = reponse.data.username;
-      success = reponse.data.success;
+      name = response.data.username;
+      success = response.data.success;
+      console.log(response);
     }).catch(e => {
       console.log(e);
     });
 
-    return {name: name, success: 1};
+    return {name: name, success: success};
   };
 
   function logout(name) {
@@ -33,7 +34,8 @@ function login(user, password) {
         username: name
       }
     }).then(response => {
-      success = reponse.data.success;
+      success = response.data.success;
+      console.log(response);
     }).catch(e => {
       console.log(e);
     });
@@ -51,8 +53,9 @@ function login(user, password) {
     let success;
 
     axios({method: 'post', url: '/user/register/', data: pack}).then(response => {
-      name = reponse.data.username;
-      success = reponse.data.success;
+      name = response.data.username;
+      success = response.data.success;
+      console.log(response);
     }).catch(e => {
       console.log(e);
     });
@@ -74,7 +77,7 @@ function login(user, password) {
         [type]: user
       }
     }).then(response => {
-      status = reponse.data.status;
+      status = response.data.status;
     }).catch(e => {
       console.log(e);
     });
@@ -91,7 +94,8 @@ function login(user, password) {
         email: email
       }
     }).then(response => {
-      success = reponse.data.success;
+      success = response.data.success;
+      console.log(response);
     }).catch(e => {
       console.log(e);
     });
@@ -108,7 +112,7 @@ function login(user, password) {
     let success;
 
     axios({method: 'post', url: '/user/password/', data: pack}).then(response => {
-      success = reponse.data.success;
+      success = response.data.success;
     }).catch(e => {
       console.log(e);
     });
@@ -126,7 +130,7 @@ function login(user, password) {
     let success;
 
     axios({method: 'put', url: '/user/password/', data: pack}).then(response => {
-      success = reponse.data.success;
+      success = response.data.success;
     }).catch(e => {
       console.log(e);
     });
@@ -145,7 +149,7 @@ function login(user, password) {
     let success;
 
     axios({method: 'post', url: '/course/record/', data: pack}).then(response => {
-      success = reponse.data.success;
+      success = response.data.success;
     }).catch(e => {
       console.log(e);
     });
@@ -161,7 +165,7 @@ function login(user, password) {
     let success;
 
     axios({method: 'delete', url: '/course/record/', params: pack}).then(response => {
-      success = reponse.data.success;
+      success = response.data.success;
     }).catch(e => {
       console.log(e);
     });
@@ -178,7 +182,7 @@ function login(user, password) {
     let success;
 
     axios({method: 'post', url: '/course/', data: pack}).then(response => {
-      success = reponse.data.success;
+      success = response.data.success;
     }).catch(e => {
       console.log(e);
     });
@@ -195,7 +199,7 @@ function login(user, password) {
     let success;
 
     axios({method: 'put', url: '/course/', data: pack}).then(response => {
-      success = reponse.data.success;
+      success = response.data.success;
     }).catch(e => {
       console.log(e);
     });
