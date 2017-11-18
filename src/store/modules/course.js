@@ -4,6 +4,7 @@ import exams from '../../api/exams'
 import exam from '../../api/exam'
 import questions from '../../api/questions'
 import judge from '../../api/judge'
+import collection from '../../api/collection'
 
 // initial state
 // shape: [{ id, quantity }]
@@ -28,7 +29,7 @@ const getters = {
     return state.selected.filter(select => select).length;
   },
   totalCorrect: state => {
-    return state.result.filter(r => (r==="1" || r===1)).length;
+    return state.result.filter(r => (r === "1" || r === 1)).length;
   }
 }
 
@@ -96,6 +97,24 @@ const actions = {
     commit(types.ADD_ANSWERS, answers)
     commit(types.ADD_RESULT, result)
     commit(types.ADD_EVALUATE, evaluate)
+  },
+
+  getquestionsC({
+    commit,
+    state
+  }, subjectId) {
+
+    let qs = [];
+    let questionsC = [];
+
+    //规范化处理
+    // let {id,problemNote:note} = collection.getCollection();
+    let coll = collection.getCollection();
+    qs = questions.getQuestions();
+    for (var index in coll) {
+      questionsC.push({id: coll[index].id, correct: coll[index].problemAns, note: coll[index].problemNote, content: qs[index].pro_detail, options: qs[index].option});
+    }
+    commit(types.ADD_QUESTIONSC, questionsC);
   }
 }
 

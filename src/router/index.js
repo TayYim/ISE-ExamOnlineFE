@@ -8,7 +8,7 @@ import Confirm from '@/components/exam/Confirm'
 import Question from '@/components/question/Question';
 import Work from '@/components/question/Work';
 import Result from '@/components/question/Result';
-// import Collection from '@/components/collection/Collection';
+import Collection from '@/components/collection/Collection';
 // import Login from '@/components/user/Login';
 // import Register from '@/components/user/Register';
 
@@ -50,11 +50,11 @@ var router = new Router({
         }
       ]
     },
-    // {
-    //     path: '/collection',
-    //     name: 'collection',
-    //     component: Collection
-    // } ,
+    {
+        path: '/collection',
+        name: 'collection',
+        component: Collection
+    } ,
     // {
     //     path: '/login',
     //     name: 'login',
