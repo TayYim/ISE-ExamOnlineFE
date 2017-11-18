@@ -56,7 +56,7 @@ const actions = {
     commit(types.ADD_SUBJECTS, data)
   },
 
-  getExam({commit, state}) {
+  getExam({commit, state}) { //to be simplified
     let questions;
     if (state.mode === 0) {
       //规范化处理
@@ -71,7 +71,7 @@ const actions = {
       }
     } else {
       let {ProblemNum, Problems} = exam.getExam(); //random
-      
+
       questions = {
         total: ProblemNum,
         id: []

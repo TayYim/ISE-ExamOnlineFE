@@ -1,3 +1,5 @@
+import axios from '@/axios'
+
 const _judge = {
   "success": 1,
   "Problems": [
@@ -29,5 +31,25 @@ const _judge = {
 export default {
   getJudge() {
     return _judge;
-  }
+  },
+
+  // getJudge(name, answerSheet) {
+  //   let _judge = [];
+  //
+  //   axios({
+  //     method: 'post',
+  //     url: '/course/judge/',
+  //     data: {
+  //       username: name,
+  //       Problems: answerSheet
+  //     }
+  //   }).then(response => {
+  //     _judge = reponse.data;
+  //   }).catch(e => {
+  //     console.log('err');
+  //   });
+  //
+  //   // handle the type!!
+  //   return _judge;
+  // }
 }

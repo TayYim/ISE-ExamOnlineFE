@@ -1,3 +1,5 @@
+import axios from '@/axios'
+
 const _collection = [
   {
     id: 123213,
@@ -21,5 +23,25 @@ const _collection = [
 export default {
   getCollection() {
     return _collection;
-  }
+  },
+
+  // getCollection(subjectId, name) {
+  //   let _collection = [];
+  //
+  //   axios({
+  //     method: 'get',
+  //     url: '/course/record/',
+  //     params: {
+  //       username: name,
+  //       courseType: subjectId
+  //     }
+  //   }).then(response => {
+  //     _collection = reponse.data;
+  //   }).catch(e => {
+  //     console.log('err');
+  //   });
+  //
+  //   // handle the type!!
+  //   return _collection;
+  // }
 }

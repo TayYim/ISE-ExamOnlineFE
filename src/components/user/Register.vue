@@ -53,6 +53,8 @@ import {
   mapMutations
 } from 'vuex';
 
+import utils from '@/api/utils'
+
 export default {
   name: "Register",
   data() {
@@ -136,6 +138,7 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
+          // utils.register(this.form.useremail, this.form.username, this.form.password, this.form.chaptcha);
           this.$Message.success('Success!');
         } else {
           this.$Message.error('Fail!');

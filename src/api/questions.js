@@ -1,3 +1,5 @@
+import axios from '@/axios'
+
 const _questions = [
   {
     "success": 1,
@@ -25,5 +27,24 @@ const _questions = [
 export default {
   getQuestions() {
     return _questions;
-  }
+  },
+
+  // getQuestions(ids) {
+  //   let _questions = [];
+  //
+  //   for (let questionId of ids) {
+  //     axios({
+  //       method: 'get',
+  //       url: '/course/problem/',
+  //       params: {
+  //         ProblemId: questionId
+  //       }
+  //     }).then(response => {
+  //       _questions.push(response.data);
+  //     }).catch(e => {});
+  //   }
+  //
+  //   // handle the type!!
+  //   return _questions;
+  // }
 }

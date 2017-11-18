@@ -5,20 +5,16 @@ import App from './App'
 import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
 import store from './store'
 import VueParticles from 'vue-particles'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../static/me.css'
+import axios from './axios'
 
-Vue.use(VueAxios, axios)
 Vue.use(iView)
 // Vue.use(Vuex)
 Vue.use(VueParticles)
-
-axios.defaults.baseURL = 'http://localhost:3000';
 
 /**
  * login first before enter the collection

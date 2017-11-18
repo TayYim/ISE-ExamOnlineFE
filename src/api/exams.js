@@ -1,6 +1,9 @@
 /**
  * Mocking client-server processing
  */
+
+import axios from '@/axios'
+
 const _exams = [
   {
     "paper_year": 2016,
@@ -27,6 +30,30 @@ const _exams = [
 
 export default {
   getExams() {
+        axios({
+          method: 'post',
+          url: '/user/sendEmail/',
+          data: {
+            email: "yan_sy@126.com"
+          }
+        }).then(response => {
+          console.log(response);
+        }).catch(e => {});
     return _exams;
-  }
+  },
+
+  // getExams(subjectId) {
+  //     let _exams={};
+  //   axios({
+  //     method: 'get',
+  //     url: '/course/course/',
+  //     params: {
+  //       course: subjectId
+  //     }
+  //   }).then(response => {
+  //     _exams = response.data;
+  //   }).catch(e => {});
+  //   // handle the type!!
+  //   return _exams;
+  // }
 }

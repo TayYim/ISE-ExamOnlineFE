@@ -34,10 +34,13 @@
   <vue-particles color="#dedede"></vue-particles>
 </div>
 </template>
+
 <script>
 import {
   mapMutations
 } from 'vuex';
+
+import utils from '@/api/utils'
 
 export default {
   name: "Login",
@@ -84,13 +87,8 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-            // 识别是用户名还是email
-            let emailPatt = /^[a-z_0-9.-]{1,64}@([a-z0-9-]{1,200}.){1,5}[a-z]{1,6}$/;
-            if (emailPatt.test(this.form.user)) {
-                this.$Message.success('Success! email');
-            }else {
-                this.$Message.success('Success! name');
-            }
+            this.$Message.success('Success! email');
+            // utils.login(this.form.user,this.form.password);
         } else {
           this.$Message.error('Fail!');
         }
