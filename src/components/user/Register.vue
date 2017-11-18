@@ -138,10 +138,16 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          // utils.register(this.form.useremail, this.form.username, this.form.password, this.form.chaptcha);
-          this.$Message.success('Success!');
+          let {
+            success
+          } = utils.register(this.form.useremail, this.form.username, this.form.password, this.form.chaptcha);
+          if (success) {
+            this.$Message.success('注册成功');
+          } else {
+            this.$Message.error('注册失败!');
+          }
         } else {
-          this.$Message.error('Fail!');
+          this.$Message.error('请输入正确的信息!');
         }
       })
     },

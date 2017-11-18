@@ -51,46 +51,6 @@ export default {
   },
 
   methods: {
-<<<<<<< HEAD
-    /**
-     * get exam papers by course_id
-     * @param  {[String]} course_id
-     */
-    showExams(course_id) {
-      this.axios({
-          method: 'get',
-          url: '/course/course/',
-          params: {
-            course: 5
-          }
-        })
-        .then(response => {
-          this.exams = response.data;
-          console.log(response.data);
-          console.log(this.exams);
-        })
-        .catch(e => {
-            console.log('failed');
-          this.errors.push(e)
-        })
-    },
-
-    selectExam(exam) {
-      this.toggleSelected();
-      this.exam = exam;
-    },
-    toggleSelected() {
-      this.examSelected = !this.examSelected;
-    },
-    selectMode(name) {
-      if (name === "paperMode") {
-        this.isPaperMode = true;
-      } else {
-        this.isPaperMode = false;
-      }
-    },
-=======
->>>>>>> rebuild
     ...mapMutations([
       'setCurrentPage',
     ])

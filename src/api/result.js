@@ -1,3 +1,4 @@
+//remove
 const _result ={
     evaluate: "Sutpid function for child",
 
