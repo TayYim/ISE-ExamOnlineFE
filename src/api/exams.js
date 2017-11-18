@@ -57,7 +57,7 @@ export default {
   //   return _exams;
   // },
 
-  getExams(subjectId) {
+  getExams(subjectId,cb) {
       let _exams={};
     axios({
       method: 'get',
@@ -66,8 +66,8 @@ export default {
         course: subjectId
       }
     }).then(response => {
-      _exams = response.data;
-      return _exams;
+      _exams = response.data.papers;
+      cb(_exams);
     }).catch(e => {});
     // handle the type!!
   }
