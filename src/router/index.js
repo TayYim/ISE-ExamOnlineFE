@@ -5,7 +5,9 @@ import Exam from '@/components/exam/Exam'
 import Normal from '@/components/exam/Normal'
 import Random from '@/components/exam/Random'
 import Confirm from '@/components/exam/Confirm'
-// import Question from '@/components/question/Question';
+import Question from '@/components/question/Question';
+import Work from '@/components/question/Work';
+import Result from '@/components/question/Result';
 // import Collection from '@/components/collection/Collection';
 // import Login from '@/components/user/Login';
 // import Register from '@/components/user/Register';
@@ -34,12 +36,20 @@ var router = new Router({
           component: Confirm
         }
       ]
+    }, {
+      path: '/question',
+      name: 'question',
+      component: Question,
+      children: [
+        {
+          path: 'work',
+          component: Work
+        }, {
+          path: 'result',
+          component: Result
+        }
+      ]
     },
-    // {
-    //     path: '/question',
-    //     name: 'question',
-    //     component: Question
-    // },
     // {
     //     path: '/collection',
     //     name: 'collection',

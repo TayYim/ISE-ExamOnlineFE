@@ -1,20 +1,13 @@
 <template>
 <div id="Confirm">
-    <div v-if="this.mode===0">
-        <h1>{{exam.title}}</h1>
-        <h2>{{exam.year}}</h2>
-    </div>
-    <div v-else>
-        <h1>{{exam.title}}</h1>
-        <h2>随机抽题模式</h2>
-    </div>
+    <h1>{{exam.title}}</h1>
+    <h2>{{exam.year}}</h2>
+
 
   <Row type="flex" justify="space-around" class="code-row-bg">
     <Col span="6">
     <Button @click="goBack" type="default" size="large">返回</Button>
-    <router-link to="/question">
-      <Button @click="beginExam" type="primary" size="large">开始答题</Button>
-    </router-link>
+    <Button @click="beginExam" type="primary" size="large">开始答题</Button>
     </Col>
   </Row>
 </div>
@@ -49,17 +42,9 @@ export default {
       this.$router.go(-1);
     },
     beginExam() {
-      // let {
-      //   id,
-      //   paper_title: title,
-      //   paper_year: year
-      // } = this.exam;
-      // this.$store.commit('logExam', {
-      //   'id': id,
-      //   'title': title,
-      //   'year': year
-      // });
-      this.$store.dispatch('getExam')
+      this.$store.dispatch('getExam');
+      this.$store.dispatch('getQuestions');
+      this.$router.push('/question/work');
     },
   },
 

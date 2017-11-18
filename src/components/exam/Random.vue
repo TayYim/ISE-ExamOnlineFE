@@ -23,7 +23,7 @@ export default {
 
   methods: {
     selectSubject(single) {
-        this.$store.commit(types.ADD_EXAM, {title: single.name,id: single.id});
+        this.$store.commit(types.ADD_EXAM, {title: single.name,id: single.id,year:"随机抽题模式"});
       this.$store.commit(types.SET_MODE, 1);
       this.$router.push('confirm');
     }

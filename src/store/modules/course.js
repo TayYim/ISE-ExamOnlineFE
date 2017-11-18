@@ -2,6 +2,8 @@ import * as types from '../mutation-types'
 import subjects from '../../api/subjects'
 import exams from '../../api/exams'
 import exam from '../../api/exam'
+import questions from '../../api/questions'
+import judge from '../../api/judge'
 
 // initial state
 // shape: [{ id, quantity }]
@@ -14,12 +16,20 @@ const state = {
   result: [],
   answers: [],
   questionsC: [],
-  mode: 0
+  mode: 0,
+  evaluate: "good!"
 }
 
 // getters
 const getters = {
-  accuracyRate: state => 1
+  accuracyRate: state => 1,
+  total: state => state.exam.questions.total,
+  userDone: state => {
+    return state.selected.filter(select => select).length;
+  },
+  totalCorrect: state => {
+    return state.result.filter(r => (r==="1" || r===1)).length;
+  }
 }
 
 // actions
@@ -56,8 +66,36 @@ const actions = {
     } else {
       console.log("random");
     }
-    commit(types.ADD_EXAM, {questions:questions})
-    console.log(state.exam);
+    commit(types.ADD_EXAM, {questions: questions})
+  },
+
+  getQuestions({commit, state}) {
+    let myQuestions = [];
+    //规范化处理
+    for (let question of questions.getQuestions()) {
+      let {id, pro_detail: content, option: options} = question;
+      myQuestions.push({id: id, content: content, options: options})
+    }
+
+    commit(types.ADD_QUESTIONS, myQuestions)
+    console.log(state.questions);
+  },
+
+  getJudge({commit, state}) {
+    let answers = [];
+    let result = [];
+    // will use state.selected
+    //规范化处理
+    let {evaluate, Problems} = judge.getJudge();
+
+    for (let problem of Problems) {
+      answers.push({correct: problem.correctAns});
+      result.push(problem.result);
+    }
+
+    commit(types.ADD_ANSWERS, answers)
+    commit(types.ADD_RESULT, result)
+    commit(types.ADD_EVALUATE, evaluate)
   }
 }
 
@@ -93,6 +131,10 @@ const mutations = {
 
   [types.SET_MODE](state, mode) {
     state.mode = mode;
+  },
+
+  [types.ADD_EVALUATE](state, evaluate) {
+    state.evaluate = evaluate;
   }
 }
 
