@@ -3,7 +3,6 @@
  */
 
 import axios from '@/axios'
-var querystring = require('querystring');
 
 const _exams = [
   {
@@ -30,46 +29,46 @@ const _exams = [
 ]
 
 export default {
-  getExams() {
-        // axios({
-        //   method: 'post',
-        //   url: '/user/sendEmail/',
-        //   data: {
-        //     email: "yan_sy@126.com"
-        //   }
-        // }).then(response => {
-        //   console.log(response);
-        // }).catch(e => {});
-        // 
-          // axios({
-          //   method: 'get',
-          //   url: '/course/course/',
-          //   params: {
-          //     "course": 5
-          //   }
-          // }).then(response => {
-          //   console.log(response);
-          // }).catch(e => {
-          //     console.log(e);
-          // });
-
-          // axios.get('/course/course/', querystring.stringify({ course: 5 }));
-
-    return _exams;
-  },
-
-  // getExams(subjectId) {
-  //     let _exams={};
-  //   axios({
-  //     method: 'get',
-  //     url: '/course/course/',
-  //     params: {
-  //       course: subjectId
-  //     }
-  //   }).then(response => {
-  //     _exams = response.data;
-  //   }).catch(e => {});
-  //   // handle the type!!
+  // getExams() {
+  //       // axios({
+  //       //   method: 'post',
+  //       //   url: '/user/sendEmail/',
+  //       //   data: {
+  //       //     email: "yan_sy@126.com"
+  //       //   }
+  //       // }).then(response => {
+  //       //   console.log(response);
+  //       // }).catch(e => {});
+  //       //
+  //         // axios({
+  //         //   method: 'get',
+  //         //   url: '/course/course/',
+  //         //   params: {
+  //         //     "course": 5
+  //         //   }
+  //         // }).then(response => {
+  //         //   console.log(response);
+  //         // }).catch(e => {
+  //         //     console.log(e);
+  //         // });
+  //
+  //         // axios.get('/course/course/', querystring.stringify({ course: 5 }));
+  //
   //   return _exams;
-  // }
+  // },
+
+  getExams(subjectId) {
+      let _exams={};
+    axios({
+      method: 'get',
+      url: '/course/course/',
+      params: {
+        course: subjectId
+      }
+    }).then(response => {
+      _exams = response.data;
+      return _exams;
+    }).catch(e => {});
+    // handle the type!!
+  }
 }

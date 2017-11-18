@@ -59,6 +59,7 @@ function login(user, password) {
     }).catch(e => {
       console.log(e);
     });
+    console.log(success);
     return {name: name, success: success}
   }
 

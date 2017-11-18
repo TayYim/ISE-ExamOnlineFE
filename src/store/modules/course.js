@@ -6,6 +6,8 @@ import questions from '../../api/questions'
 import judge from '../../api/judge'
 import collection from '../../api/collection'
 
+import axios from '@/axios'
+
 // initial state
 // shape: [{ id, quantity }]
 const state = {
@@ -43,12 +45,25 @@ const actions = {
     commit
   }, subjectId) {
     //规范化处理
-    let myExams = [];
-    for (let exam of exams.getExams()) {
-      let {id, paper_title: title, paper_year: year} = exam;
-      myExams.push({'id': id, 'title': title, 'year': year});
-    }
-    commit(types.ADD_EXAMS, myExams)
+    // let _exams = exams.getExams(subjectId);
+    //
+    axios({
+      method: 'get',
+      url: '/course/course/',
+      params: {
+        course: subjectId
+      }
+    }).then(response => {
+      let _exams = response.data.papers;
+      let myExams = [];
+      console.log(_exams);
+      for (let exam of _exams) {
+        let {id, paper_title: title, paper_year: year} = exam;
+        myExams.push({'id': id, 'title': title, 'year': year});
+      }
+      commit(types.ADD_EXAMS, myExams)
+    }).catch(e => {});
+
   },
 
   getSubjects({commit}) {
