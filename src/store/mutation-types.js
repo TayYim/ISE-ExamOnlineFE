@@ -1,0 +1,8 @@
+export const ADD_EXAMS = 'ADD_EXAMS'
+export const ADD_EXAM = 'ADD_EXAM'
+export const ADD_QUESTIONS = 'ADD_QUESTIONS'
+export const ADD_QUESTIONSC = 'ADD_QUESTIONSC'
+export const ADD_RESULT = 'ADD_RESULT'
+export const ADD_ANSWERS = 'ADD_ANSWERS'
+export const ADD_SUBJECTS = 'ADD_SUBJECTS'
+export const SET_MODE = 'SET_MODE'

@@ -13,7 +13,7 @@
           首页
         </Menu-item>
       </router-link>
-      <router-link to="/exam">
+      <router-link to="/exam/normal">
         <Menu-item name="exam">
           刷题
         </Menu-item>

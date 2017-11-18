@@ -8,69 +8,17 @@ import 'iview/dist/styles/iview.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
+import store from './store'
 import VueParticles from 'vue-particles'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../static/me.css'
 
 Vue.use(VueAxios, axios)
 Vue.use(iView)
-Vue.use(Vuex)
+// Vue.use(Vuex)
 Vue.use(VueParticles)
 
 axios.defaults.baseURL = 'http://localhost:3000';
-
-const store = new Vuex.Store({
-  state: {
-    exam: {
-      id: 0,
-      title: "",
-      year: ""
-    },
-    totalNum: 0,
-    userSelect: [],
-    questions: [],
-    questionsHead: [],
-    userName: "admin",
-    userEmail: "admin@qq.com",
-    isLogged: false,
-    currentPage: "home"
-  },
-  mutations: {
-    logExam(state, exam) {
-      state.exam = exam;
-    },
-    logTotalNum(state, totalNum) {
-      state.totalNum = totalNum;
-    },
-    logUserSelect(state, userSelect) {
-      state.userSelect = userSelect;
-    },
-    logQuestions(state, questions) {
-      state.questions = questions;
-    },
-    logQuestionsHead(state, questionsHead) {
-      state.questionsHead = questionsHead;
-    },
-    setUserName(state, userName) {
-      state.userName = userName;
-    },
-    setUseEmail(state, useEmail) {
-      state.useEmail = useEmail;
-    },
-    toggleLogged(state) {
-      state.isLogged = !state.isLogged;
-    },
-    setCurrentPage(state, name) {
-      state.currentPage = name;
-      console.log(state.currentPage);
-    }
-  },
-  getters: {
-    userDone: state => {
-      return state.userSelect.filter(select => select).length;
-    }
-  }
-});
 
 /**
  * login first before enter the collection
