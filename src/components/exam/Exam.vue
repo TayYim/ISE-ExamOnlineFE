@@ -1,42 +1,28 @@
 <template>
 <div id="Exam" class="layout">
   <div class="layout-content">
-    <Menu @on-select="selectMode" v-show="!examSelected" mode="horizontal" active-name="1">
-      <div class="layout-assistant">
-        <MenuItem name="paperMode">选择套题</MenuItem>
-        <MenuItem name="randomMode">随机刷题</MenuItem>
-      </div>
-    </Menu>
 
-    <Row v-show="!examSelected && isPaperMode">
-      <Col span="10">
-      <ExamSidebar @getExams="showExams"></ExamSidebar>
-      </Col>
-      <Col span="14">
-      <ExamList :exams="exams" @selectExam="selectExam"></ExamList>
-      </Col>
-    </Row>
-
-    <Row v-show="!examSelected && !isPaperMode">
-      <h1>选择一个学科，马上开始刷题吧！</h1>
-      <ExamRandom></ExamRandom>
-    </Row>
-
-    <div v-show="examSelected">
-      <ExamConfirm :exam="exam" @goBack="toggleSelected"></ExamConfirm>
-    </div>
-  </div>
-  <div class="layout-copy">
-    2017 &copy; ISE-Group-12
+    <!-- <Normal></Normal> -->
+    <router-view>
+      <Row>
+        <Menu mode="horizontal" active-name="1">
+          <div class="layout-assistant">
+            <router-link to="/exam/normal">
+              <MenuItem name="paperMode">选择套题</MenuItem>
+            </router-link>
+            <router-link to="/exam/random">
+              <MenuItem name="randomMode">随机刷题</MenuItem>
+            </router-link>
+          </div>
+        </Menu>
+      </Row>
+    </router-view>
   </div>
 </div>
 </template>
 
 <script>
-import ExamSidebar from '@/components/exam/ExamSidebar';
-import ExamList from '@/components/exam/ExamList';
-import ExamConfirm from '@/components/exam/ExamConfirm';
-import ExamRandom from '@/components/exam/ExamRandom';
+import Normal from '@/components/exam/Normal';
 
 import {
   mapState
@@ -48,23 +34,10 @@ import {
 export default {
   name: "Exam",
   data() {
-    return {
-      exams: [],
-      errors: [],
-      exam: {},
-      examSelected: false,
-      isPaperMode: true
-    }
+    return {}
   },
   components: {
-    ExamSidebar,
-    ExamList,
-    ExamConfirm,
-    ExamRandom
-  },
-
-  created() {
-    this.showExams('-1');
+    Normal
   },
 
   /**
@@ -78,6 +51,7 @@ export default {
   },
 
   methods: {
+<<<<<<< HEAD
     /**
      * get exam papers by course_id
      * @param  {[String]} course_id
@@ -115,6 +89,8 @@ export default {
         this.isPaperMode = false;
       }
     },
+=======
+>>>>>>> rebuild
     ...mapMutations([
       'setCurrentPage',
     ])

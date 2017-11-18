@@ -34,10 +34,13 @@
   <vue-particles color="#dedede"></vue-particles>
 </div>
 </template>
+
 <script>
 import {
   mapMutations
 } from 'vuex';
+
+import utils from '@/api/utils'
 
 export default {
   name: "Login",
@@ -84,7 +87,8 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$Message.success('Success!');
+            this.$Message.success('Success! email');
+            // utils.login(this.form.user,this.form.password);
         } else {
           this.$Message.error('Fail!');
         }

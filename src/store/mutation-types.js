@@ -1,0 +1,17 @@
+export const ADD_EXAMS = 'ADD_EXAMS'
+export const ADD_EXAM = 'ADD_EXAM'
+export const ADD_QUESTIONS = 'ADD_QUESTIONS'
+export const ADD_QUESTIONSC = 'ADD_QUESTIONSC'
+export const ADD_RESULT = 'ADD_RESULT'
+export const ADD_ANSWERS = 'ADD_ANSWERS'
+export const ADD_SUBJECTS = 'ADD_SUBJECTS'
+export const SET_MODE = 'SET_MODE'
+export const ADD_EVALUATE = 'ADD_EVALUATE'
+export const CLEAR_SELECTED = 'CLEAR_SELECTED'
+export const CLEAR_ANSWERS = 'CLEAR_ANSWERS'
+
+export const TOGGLE_LOGGED = 'TOGGLE_LOGGED'
+export const SET_CURRENTPAGE = 'SET_CURRENTPAGE'
+
+export const ADD_NAME = 'ADD_NAME'
+export const ADD_EMAIL = 'ADD_EMAIL'

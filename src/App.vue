@@ -13,7 +13,11 @@ export default {
   name: 'app',
   components: {
     Navbar
-  }
+},
+mounted() {
+  //do something after mounting vue instance
+  this.$store.dispatch('getSubjects')
+}
 }
 </script>
 

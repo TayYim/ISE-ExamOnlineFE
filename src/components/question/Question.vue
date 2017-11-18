@@ -1,22 +1,9 @@
 <template>
 <div id="Question">
-  <Row v-if="!submitted">
-    <Col span="10">
-    <QuestionSidebar @submitted="toggleSubmitted"></QuestionSidebar>
-    </Col>
-    <Col span="14">
-    <QuestionDisplay :examId="$route.params.examId"></QuestionDisplay>
-    </Col>
-  </Row>
-  <Row v-if="submitted">
-    <QuestionResult></QuestionResult>
-  </Row>
+  <router-view></router-view>
 </div>
 </template>
 <script>
-import QuestionSidebar from '@/components/question/QuestionSidebar';
-import QuestionDisplay from '@/components/question/QuestionDisplay';
-import QuestionResult from '@/components/question/QuestionResult';
 
 import {
   mapMutations
@@ -48,9 +35,7 @@ export default {
   },
 
   components: {
-    QuestionSidebar,
-    QuestionDisplay,
-    QuestionResult
+
   },
 }
 </script>

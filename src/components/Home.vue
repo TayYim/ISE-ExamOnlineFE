@@ -10,7 +10,7 @@
             <p>学习者的大事，大快所有人心的大好事</p>
             <div>
               <router-link to="/login"><a class="btn btn-home" role="button">登陆/注册</a></router-link>
-              <router-link to="/exam"><a class="btn btn-home" role="button">即刻开始</a></router-link>
+              <router-link to="/exam/normal"><a class="btn btn-home" role="button">即刻开始</a></router-link>
             </div>
           </div>
         </div>

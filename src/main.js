@@ -5,18 +5,18 @@ import App from './App'
 import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
+import store from './store'
 import VueParticles from 'vue-particles'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../static/me.css'
+import axios from './axios'
 
-Vue.use(VueAxios, axios)
 Vue.use(iView)
-Vue.use(Vuex)
+// Vue.use(Vuex)
 Vue.use(VueParticles)
 
+<<<<<<< HEAD
 axios.defaults.baseURL = 'http://45.32.66.148:8000';
 
 const store = new Vuex.Store({
@@ -72,16 +72,18 @@ const store = new Vuex.Store({
   }
 });
 
+=======
+>>>>>>> rebuild
 /**
  * login first before enter the collection
  */
-router.beforeEach(function(to, from, next) {
-  if (!store.isLogged && to.name === "collection") {
-    next('login')
-  } else {
-    next();
-  }
-})
+// router.beforeEach(function(to, from, next) {
+//   if (!store.isLogged && to.name === "collection") {
+//     next('login')
+//   } else {
+//     next();
+//   }
+// })
 
 Vue.config.productionTip = false
 

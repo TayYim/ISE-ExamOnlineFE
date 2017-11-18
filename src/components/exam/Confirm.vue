@@ -1,13 +1,13 @@
 <template>
-<div id="ExamConfirm">
-  <h1>{{exam.paper_title}}</h1>
-  <h2>{{exam.paper_year}}</h2>
+<div id="Confirm">
+    <h1>{{exam.title}}</h1>
+    <h2>{{exam.year}}</h2>
+
+
   <Row type="flex" justify="space-around" class="code-row-bg">
     <Col span="6">
     <Button @click="goBack" type="default" size="large">返回</Button>
-    <router-link to="/question">
-      <Button @click="beginExam" type="primary" size="large">开始答题</Button>
-    </router-link>
+    <Button @click="beginExam" type="primary" size="large">开始答题</Button>
     </Col>
   </Row>
 </div>
@@ -18,10 +18,8 @@ import {
 } from 'vuex'
 
 export default {
-  name: "ExamConfirm",
+  name: "Confirm",
   data: () => ({}),
-
-  props: ['exam'],
 
   beforeUpdate() {
     //do something before updating vue instance
@@ -41,31 +39,30 @@ export default {
 
   methods: {
     goBack() {
-      this.$emit('goBack');
+      this.$router.go(-1);
     },
     beginExam() {
-      let {
-        id,
-        paper_title: title,
-        paper_year: year
-      } = this.exam;
-      this.$store.commit('logExam', {
-        'id': id,
-        'title': title,
-        'year': year
-      });
-    }
+      this.$store.dispatch('getExam');
+      this.$store.dispatch('getQuestions');
+      this.$router.push('/question/work');
+    },
   },
 
   computed: {
     ...mapState([
-      'isLogged'
-    ])
+      'isLogged',
+    ]),
+    exam() {
+      return this.$store.state.course.exam;
+    },
+    mode() {
+      return this.$store.state.course.mode;
+    }
   }
 }
 </script>
 <style lang="css" scoped>
-#ExamConfirm{
+#Confirm{
     margin-top: 100px;
     min-height: 1000px;
 }

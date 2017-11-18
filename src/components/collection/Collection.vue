@@ -1,124 +1,150 @@
 <template>
-<div id="Collection" class="layout">
-  <div class="layout-content">
-    <Row v-show="!examSelected">
-      <Col span="10">
-      <CollectionSidebar @getExams="showExams"></CollectionSidebar>
-      </Col>
-      <Col span="14">
-      <CollectionList :exams="exams" @selectExam="selectExam"></CollectionList>
-      </Col>
+<div id="Collecton">
+  <Row>
+    <Col span="10">
+    <Row type="flex" justify="end" class="code-row-bg">
+      <Menu @on-select="getCollection($event)" theme="light" active-name="0">
+        <Row>
+          <Col span="12">
+          <div v-for="(subject,index) in this.subjects" :key="subject.id">
+            <Menu-item :name="index">{{subject.name}}</Menu-item>
+          </div>
+          </Col>
+        </Row>
+      </Menu>
     </Row>
-    <div v-show="examSelected">
-      <ExamConfirm :exam="exam" @goBack="toggleSelected"></ExamConfirm>
+    </Col>
+    <Col span="14">
+    <div class="exam-list">
+      <div>
+        <div v-for="(question,index) in questionsC">
+          <Row>
+            <Col span="4">
+            <strong>{{index+1}}.</strong>
+            <p>
+              <Button size="small" type="ghost">取消收藏</Button>
+            </p>
+            <p>
+              <Button size="small" type="ghost">修改笔记</Button>
+            </p>
+            </Col>
+            <Col span="14" align='left'>
+            <div>
+              <span v-html="_expr(question.content)"></span>
+            </div>
+            <div>
+              <ul class="options">
+                <li>A. <span v-html="_expr(question.options[0])"></span></li>
+                <li>B. <span v-html="_expr(question.options[1])"></span></li>
+                <li>C. <span v-html="_expr(question.options[2])"></span></li>
+                <li>D. <span v-html="_expr(question.options[3])"></span></li>
+              </ul>
+            </div>
+            </Col>
+          </Row>
+          <Row class="explain">
+            <Col span="8" offset="4" align="left">
+            <p>正确答案:{{showCorrectABCD(index)}}</p>
+            <Collapse>
+              <Panel name="1">
+                查看笔记：
+                <p slot="content">{{question.note}}</p>
+              </Panel>
+            </Collapse>
+            </Col>
+          </Row>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="layout-copy">
-    2017 &copy; ISE-Group-12
-  </div>
+    </Col>
+  </Row>
 </div>
 </template>
 
 <script>
-import CollectionSidebar from '@/components/collection/CollectionSidebar';
-import CollectionList from '@/components/collection/CollectionList';
-import ExamConfirm from '@/components/exam/ExamConfirm';
+import * as types from '@/store/mutation-types'
 
 export default {
-  name: "Collection",
-  data() {
-    return {
-      exams: [],
-      errors: [],
-      exam: {},
-      examSelected: false
-    }
-  },
-  components: {
-    CollectionSidebar,
-    CollectionList,
-    ExamConfirm
-  },
+  name: "Collecton",
+  data: () => ({}),
 
-  created() {
-    this.showExams('0');
+  mounted() {
+    //do something after mounting vue instance
+    this.getCollection(0);
   },
 
   methods: {
-    /**
-     * get exam papers by course_id
-     * @param  {[String]} course_id
-     */
-    showExams(course_id) {
-      let host = this.baseUrl + `subject`;
-      if (course_id !== '0') {
-        host = host + `?course=` + course_id;
+    getCollection(index) {
+      let subjectId = this.subjects[index].id;
+      this.$store.dispatch('getquestionsC', subjectId);
+    },
+    _expr: function (expr) {
+      var _expr = expr.replace(/\s\s+/g, ' ').replace(/ /gi, "~");
+      try {
+        return katex.renderToString(_expr, {
+          throwOnError: false
+        });
+      } catch (err) {
+        return expr
       }
-      //   get exam papers
-      this.axios.get(host)
-        .then(response => {
-          this.exams = response.data;
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
     },
-    selectExam(exam) {
-      this.toggleSelected();
-      this.exam = exam;
+
+    showCorrectABCD(index) {
+      let option = this.questionsC[index].correct;
+      return this.showABCD(option);
     },
-    toggleSelected() {
-      this.examSelected = !this.examSelected;
+
+    /**
+     * Transform uitl
+     * @param  {number} option 0,1,2,3
+     * @return {string}        A,B,C,D
+     */
+    showABCD(option) {
+      //   option = option.toString();
+      switch (option) {
+        case "0":
+          return "A";
+          break;
+        case "1":
+          return "B";
+          break;
+        case "2":
+          return "C";
+          break;
+        case "3":
+          return "D";
+          break;
+        default:
+          return "error"
+
+      }
     }
   },
+
   computed: {
-    baseUrl() {
-      return this.$store.state.baseUrl;
+    subjects() {
+      return this.$store.state.course.subjects
+    },
+    questionsC() {
+      return this.$store.state.course.questionsC
     }
   }
+
 }
 </script>
 
 <style lang="css" scoped>
-.layout{
-    border: 1px solid #d7dde4;
-    background: #f5f7f9;
+#Collecton{
+    /*margin-top: 40px;
+    min-height: 1000px;*/
 }
-.layout-logo{
-    width: 100px;
-    height: 30px;
-    background: #5b6270;
-    border-radius: 3px;
-    float: left;
-    position: relative;
-    top: 15px;
-    left: 20px;
+
+.options > *{
+    margin: 40px;
+    line-height: 2;
 }
-.layout-nav{
-    width: 420px;
-    margin: 0 auto;
-}
-.layout-assistant{
-    width: 300px;
-    margin: 0 auto;
-    height: inherit;
-}
-.layout-breadcrumb{
-    padding: 10px 15px 0;
-}
-.layout-content{
-    min-height: 200px;
-    margin: 15px;
-    overflow: hidden;
-    background: #fff;
-    border-radius: 4px;
-}
-.layout-content-main{
-    padding: 10px;
-}
-.layout-copy{
-    text-align: center;
-    padding: 10px 0 20px;
-    color: #9ea7b4;
+
+.explain{
+    margin-bottom: 40px;
 }
 </style>
