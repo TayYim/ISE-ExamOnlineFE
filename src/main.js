@@ -16,64 +16,6 @@ Vue.use(iView)
 // Vue.use(Vuex)
 Vue.use(VueParticles)
 
-<<<<<<< HEAD
-axios.defaults.baseURL = 'http://45.32.66.148:8000';
-
-const store = new Vuex.Store({
-  state: {
-    exam: {
-      id: 0,
-      title: "",
-      year: ""
-    },
-    totalNum: 0,
-    userSelect: [],
-    questions: [],
-    questionsHead: [],
-    userName: "admin",
-    userEmail: "admin@qq.com",
-    isLogged: true,
-    currentPage: "home"
-  },
-  mutations: {
-    logExam(state, exam) {
-      state.exam = exam;
-    },
-    logTotalNum(state, totalNum) {
-      state.totalNum = totalNum;
-    },
-    logUserSelect(state, userSelect) {
-      state.userSelect = userSelect;
-    },
-    logQuestions(state, questions) {
-      state.questions = questions;
-    },
-    logQuestionsHead(state, questionsHead) {
-      state.questionsHead = questionsHead;
-    },
-    setUserName(state, userName) {
-      state.userName = userName;
-    },
-    setUseEmail(state, useEmail) {
-      state.useEmail = useEmail;
-    },
-    toggleLogged(state) {
-      state.isLogged = !state.isLogged;
-    },
-    setCurrentPage(state, name) {
-      state.currentPage = name;
-      console.log(state.currentPage);
-    }
-  },
-  getters: {
-    userDone: state => {
-      return state.userSelect.filter(select => select).length;
-    }
-  }
-});
-
-=======
->>>>>>> rebuild
 /**
  * login first before enter the collection
  */
