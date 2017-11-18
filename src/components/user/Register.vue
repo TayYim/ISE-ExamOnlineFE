@@ -22,7 +22,7 @@
           <Input type="text" v-model="form.useremail" placeholder="邮箱">
           <Icon type="ios-email-outline" slot="prepend"></Icon>
           </Input>
-          <a type="text" @click="">发送验证码</a>
+          <a type="text" @click="sendEmail">发送验证码</a>
         </FormItem>
         <FormItem prop="chaptcha">
           <Input type="text" v-model="form.chaptcha" placeholder="验证码">
@@ -153,7 +153,18 @@ export default {
     },
     ...mapMutations([
       'setCurrentPage',
-    ])
+    ]),
+    sendEmail() {
+      let {
+        success
+      } =
+      utils.sendEmail(this.form.useremail);
+      if (success) {
+          console.log("send ok!");
+      }else {
+          console.log("can not send");
+      }
+    }
   }
 }
 </script>
