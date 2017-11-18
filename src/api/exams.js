@@ -3,6 +3,7 @@
  */
 
 import axios from '@/axios'
+var querystring = require('querystring');
 
 const _exams = [
   {
@@ -30,15 +31,30 @@ const _exams = [
 
 export default {
   getExams() {
-        axios({
-          method: 'post',
-          url: '/user/sendEmail/',
-          data: {
-            email: "yan_sy@126.com"
-          }
-        }).then(response => {
-          console.log(response);
-        }).catch(e => {});
+        // axios({
+        //   method: 'post',
+        //   url: '/user/sendEmail/',
+        //   data: {
+        //     email: "yan_sy@126.com"
+        //   }
+        // }).then(response => {
+        //   console.log(response);
+        // }).catch(e => {});
+        // 
+          // axios({
+          //   method: 'get',
+          //   url: '/course/course/',
+          //   params: {
+          //     "course": 5
+          //   }
+          // }).then(response => {
+          //   console.log(response);
+          // }).catch(e => {
+          //     console.log(e);
+          // });
+
+          // axios.get('/course/course/', querystring.stringify({ course: 5 }));
+
     return _exams;
   },
 

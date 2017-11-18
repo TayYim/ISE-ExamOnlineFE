@@ -87,10 +87,17 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-            this.$Message.success('Success! email');
-            // utils.login(this.form.user,this.form.password);
+          let {
+            success
+          } = utils.login(this.form.user, this.form.password);
+
+          if (success) {
+            this.$Message.success('登陆成功');
+          } else {
+            this.$Message.error('登陆失败!');
+          }
         } else {
-          this.$Message.error('Fail!');
+          this.$Message.error('请输入正确的信息!');
         }
       })
     },

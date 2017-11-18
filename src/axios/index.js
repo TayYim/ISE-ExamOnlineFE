@@ -9,7 +9,7 @@ var axios = theAxios.create({
   // timeout: 1000,
   // headers: {'X-Custom-Header': 'foobar'}
   // headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-  withCredentials:true
+  // withCredentials:true
 });
 
 export default axios
