@@ -9,8 +9,8 @@ import Question from '@/components/question/Question';
 import Work from '@/components/question/Work';
 import Result from '@/components/question/Result';
 import Collection from '@/components/collection/Collection';
-// import Login from '@/components/user/Login';
-// import Register from '@/components/user/Register';
+import Login from '@/components/user/Login';
+import Register from '@/components/user/Register';
 
 Vue.use(Router)
 
@@ -49,22 +49,19 @@ var router = new Router({
           component: Result
         }
       ]
-    },
-    {
-        path: '/collection',
-        name: 'collection',
-        component: Collection
-    } ,
-    // {
-    //     path: '/login',
-    //     name: 'login',
-    //     component:Login
-    // },
-    // {
-    //     path: '/register',
-    //     name: 'register',
-    //     component:Register
-    // }
+    }, {
+      path: '/collection',
+      name: 'collection',
+      component: Collection
+    }, {
+      path: '/login',
+      name: 'login',
+      component: Login
+    }, {
+      path: '/register',
+      name: 'register',
+      component: Register
+    }
   ]
 });
 

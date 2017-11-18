@@ -61,6 +61,7 @@ const actions = {
     if (state.mode === 0) {
       //规范化处理
       let {ProblemNum, Problems} = exam.getExam();
+
       questions = {
         total: ProblemNum,
         id: []
@@ -69,7 +70,15 @@ const actions = {
         questions.id.push(question.ProblemId);
       }
     } else {
-      console.log("random");
+      let {ProblemNum, Problems} = exam.getExam(); //random
+      
+      questions = {
+        total: ProblemNum,
+        id: []
+      };
+      for (let question of Problems) {
+        questions.id.push(question.ProblemId);
+      }
     }
     commit(types.ADD_EXAM, {questions: questions})
   },

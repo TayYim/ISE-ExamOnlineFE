@@ -84,7 +84,13 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$Message.success('Success!');
+            // 识别是用户名还是email
+            let emailPatt = /^[a-z_0-9.-]{1,64}@([a-z0-9-]{1,200}.){1,5}[a-z]{1,6}$/;
+            if (emailPatt.test(this.form.user)) {
+                this.$Message.success('Success! email');
+            }else {
+                this.$Message.success('Success! name');
+            }
         } else {
           this.$Message.error('Fail!');
         }

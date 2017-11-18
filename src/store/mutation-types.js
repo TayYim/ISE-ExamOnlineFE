@@ -9,3 +9,9 @@ export const SET_MODE = 'SET_MODE'
 export const ADD_EVALUATE = 'ADD_EVALUATE'
 export const CLEAR_SELECTED = 'CLEAR_SELECTED'
 export const CLEAR_ANSWERS = 'CLEAR_ANSWERS'
+
+export const TOGGLE_LOGGED = 'TOGGLE_LOGGED'
+export const SET_CURRENTPAGE = 'SET_CURRENTPAGE'
+
+export const ADD_NAME = 'ADD_NAME'
+export const ADD_EMAIL = 'ADD_EMAIL'

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import course from './modules/course'
+import user from './modules/user'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
     isLogged: false
   },
   modules: {
-    course
+    course,
+    user
   },
   mutations: {
     toggleLogged(state) {
