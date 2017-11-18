@@ -42,6 +42,8 @@ import {
 
 import utils from '@/api/utils'
 
+import * as types from '@/store/mutation-types'
+
 export default {
   name: "Login",
   data() {
@@ -88,11 +90,15 @@ export default {
       this.$refs[name].validate((valid) => {
         if (valid) {
           let {
+            name,
             success
           } = utils.login(this.form.user, this.form.password);
 
           if (success) {
             this.$Message.success('登陆成功');
+            this.$store.commit('toggleLogged');
+            this.$store.commit(types.ADD_NAME,name);
+            this.$router.push('/exam/normal');
           } else {
             this.$Message.error('登陆失败!');
           }

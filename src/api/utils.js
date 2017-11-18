@@ -21,7 +21,7 @@ function login(user, password) {
       console.log(e);
     });
 
-    return {name: name, success: success};
+    return {name: name, success: 1};
   };
 
   function logout(name) {

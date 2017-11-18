@@ -44,7 +44,7 @@
       <Menu-item name="4" id="userItem">
         <Dropdown style="margin-left: 20px">
           <Button type="primary">
-          {{userName}}
+          {{name}}
           </Button>
           <DropdownMenu slot="list">
             <DropdownItem><a @click="toggleLogged" href="javascript:void(0)">登出</a></DropdownItem>
@@ -69,12 +69,14 @@ export default {
 
   computed: {
     ...mapState([
-      'userName',
       'isLogged',
       'currentPage'
     ]),
     isHomePage() {
       return (this.currentPage === "home")
+    },
+    name() {
+      return this.$store.state.user.name;
     }
   },
 
