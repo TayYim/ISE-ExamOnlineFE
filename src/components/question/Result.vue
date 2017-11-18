@@ -45,9 +45,7 @@
       </Row>
     </div>
     <div class="footer">
-      <router-link to="/exam/normal">
-        <Button size="large" type="info">完成</Button>
-      </router-link>
+      <Button @click="finish" size="large" type="info">完成</Button>
     </div>
   </div>
 </div>
@@ -117,6 +115,11 @@ export default {
           return "error"
 
       }
+    },
+
+    finish() {
+        this.$store.dispatch('clear');
+        this.$router.push('/exam/normal');
     }
   },
 

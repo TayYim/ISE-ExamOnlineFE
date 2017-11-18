@@ -35,6 +35,10 @@ const getters = {
 
 // actions
 const actions = {
+  clear({commit}) {
+    commit(types.CLEAR_ANSWERS);
+    commit(types.CLEAR_SELECTED);
+  },
   getExams({
     commit
   }, subjectId) {
@@ -154,6 +158,14 @@ const mutations = {
 
   [types.ADD_EVALUATE](state, evaluate) {
     state.evaluate = evaluate;
+  },
+
+  [types.CLEAR_SELECTED](state) {
+    state.selected = [];
+  },
+
+  [types.CLEAR_ANSWERS](state) {
+    state.answers = [];
   }
 }
 
