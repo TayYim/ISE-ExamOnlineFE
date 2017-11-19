@@ -19,13 +19,13 @@ Vue.use(VueParticles)
 /**
  * login first before enter the collection
  */
-router.beforeEach(function(to, from, next) {
-  if (!store.isLogged && to.name === "collection") {
-    next('/login')
-  } else {
-    next();
-  }
-})
+// router.beforeEach(function(to, from, next) {
+//   if (!store.isLogged && to.name === "collection") {
+//     next('/login')
+//   } else {
+//     next();
+//   }
+// })
 
 Vue.config.productionTip = false
 

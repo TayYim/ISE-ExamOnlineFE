@@ -4,7 +4,7 @@ import * as types from '../mutation-types'
 // initial state
 // shape: [{ id, quantity }]
 const state = {
-    name: "admin",
+    name: "Lapalaca",
     email: "admin@ywy.com"
 }
 

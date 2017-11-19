@@ -11,7 +11,7 @@
         <Col span="4">
         <strong>{{index+1}}.</strong>
         <p>
-          <Button size="large" type="text"><Icon type="ios-star-outline"></Icon></Button>
+          <Button size="large" type="text" @click="addColl(index)"><Icon type="ios-star-outline"></Icon></Button>
         </p>
         <!-- <p>
           <Button size="small" type="ghost">题目报错</Button>
@@ -51,10 +51,11 @@
 </template>
 
 <script>
+import axios from '@/axios';
 export default {
   name: "Result",
   data: () => ({
-      ABCD: ["A","B","C","D"]
+    ABCD: ["A", "B", "C", "D"]
   }),
 
   methods: {
@@ -131,6 +132,33 @@ export default {
     finish() {
       this.$store.dispatch('clear');
       this.$router.push('/exam/normal');
+    },
+
+    addColl(index) {
+      let questionId = this.questions[index].id;
+      let subjectId = 5; //temp for test
+      let name = this.$store.state.user.name;
+      let note = "this is note";
+      let pack = {
+        ProblemId: questionId,
+        courseType: subjectId,
+        username: name,
+        note: note
+      };
+      axios({
+        method: 'post',
+        url: '/course/record/',
+        data: pack
+      }).then(response => {
+        let success = response.data.success;
+        if (success) {
+          this.$Message.success('添加收藏成功!');
+        } else {
+          this.$Message.error('添加收藏失败!');
+        }
+      }).catch(e => {
+        console.log(e);
+      });
     }
   },
 

@@ -156,12 +156,12 @@ const actions = {
 
     let answerSheet = [];
     for (var i in state.questions) {
-        let oa = state.selected[i].toString();
+      let oa = state.selected[i].toString();
       answerSheet.push({id: state.questions[i].id, originAns: oa})
     }
     console.log(answerSheet);
     //rootState.user.name
-    judge.getJudge("Lapalaca", answerSheet, (_judge) => {
+    judge.getJudge(rootState.user.name, answerSheet, (_judge) => {
       console.log('ok');
       console.log(_judge);
 
