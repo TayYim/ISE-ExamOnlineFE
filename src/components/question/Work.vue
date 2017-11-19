@@ -1,5 +1,7 @@
 <template>
 <div id="Work">
+    {{selected}}
+
   <Row>
     <Col span="10">
     <h1>{{exam.title}}</h1>
@@ -33,18 +35,13 @@
         </div>
         <div>
           <RadioGroup v-model="selected[index]" vertical class="options">
-            <Radio label="0">
-              <span v-html="_expr(question.options[0])"></span>
-            </Radio>
-            <Radio label="1">
-              <span v-html="_expr(question.options[1])"></span>
-            </Radio>
-            <Radio label="2">
-              <span v-html="_expr(question.options[2])"></span>
-            </Radio>
-            <Radio label="3">
-              <span v-html="_expr(question.options[3])"></span>
-            </Radio>
+            <div v-for="(option,indexO) in question.options">
+              <Radio :label="indexO">
+                <span v-html="_expr(question.options[indexO])"></span>
+                {{index}}
+                {{indexO}}
+              </Radio>
+            </div>
           </RadioGroup>
         </div>
         </Col>
@@ -65,6 +62,15 @@ export default {
     isDone: false,
     currentSlide: 0
   }),
+
+  mounted() {
+    //do something after mounting vue instance
+    console.log("mounted");
+
+    // this.$router.go(0);
+    console.log(this.questions);
+    console.log(this.exam);
+  },
 
   methods: {
     submitExam() {
@@ -101,7 +107,7 @@ export default {
 
     next() {
       this.currentSlide++;
-    },
+    }
 
   },
   computed: {

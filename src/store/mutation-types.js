@@ -8,6 +8,7 @@ export const ADD_SUBJECTS = 'ADD_SUBJECTS'
 export const SET_MODE = 'SET_MODE'
 export const ADD_EVALUATE = 'ADD_EVALUATE'
 export const CLEAR_SELECTED = 'CLEAR_SELECTED'
+export const INIT_SELECTED = 'INIT_SELECTED'
 export const CLEAR_ANSWERS = 'CLEAR_ANSWERS'
 
 export const TOGGLE_LOGGED = 'TOGGLE_LOGGED'

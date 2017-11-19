@@ -7,6 +7,8 @@ import judge from '../../api/judge'
 import collection from '../../api/collection'
 
 import axios from '@/axios'
+import Vue from 'vue'
+import router from '@/router'
 
 // initial state
 // shape: [{ id, quantity }]
@@ -15,7 +17,9 @@ const state = {
   exam: {},
   questions: [],
   subjects: [],
-  selected: [],
+  selected: [
+    -1, -1, -1, -1
+  ],
   result: [],
   answers: [],
   questionsC: [],
@@ -28,7 +32,9 @@ const getters = {
   accuracyRate: state => 1,
   total: state => state.exam.questions.total,
   userDone: state => {
-    return state.selected.filter(select => select).length;
+    return state.selected.filter(select => {
+      return (select !== -1)
+    }).length;
   },
   totalCorrect: state => {
     return state.result.filter(r => (r === "1" || r === 1)).length;
@@ -78,15 +84,72 @@ const actions = {
   },
 
   getQuestions({commit, state}) {
-    let myQuestions = [];
-    //规范化处理
-    for (let question of questions.getQuestions()) {
-      let {id, pro_detail: content, option: options} = question;
-      myQuestions.push({id: id, content: content, options: options})
-    }
 
-    commit(types.ADD_QUESTIONS, myQuestions)
-    console.log(state.questions);
+    // let _questions = [];
+    let ids = state.exam.questions.id;
+
+    let promise = new Promise(function(resolve, reject) {
+      let _questions = [];
+      for (let questionId of ids) {
+        axios({
+          method: 'get',
+          url: '/course/problem/',
+          params: {
+            ProblemId: questionId
+          }
+        }).then(response => {
+          _questions.push(response.data);
+          if (_questions.length === ids.length) {
+            resolve(_questions)
+          }
+        }).catch(e => {});
+      }
+    });
+
+    promise.then(_questions => {
+      let myQuestions = [];
+      for (let question of _questions) {
+        let {id, pro_detail: content, option: options} = question;
+        myQuestions.push({id: id, content: content, options: options})
+      }
+      console.log(myQuestions);
+      commit(types.ADD_QUESTIONS, myQuestions)
+      commit(types.INIT_SELECTED); //init selected
+      router.push('/question/work');
+    })
+
+    // for (let questionId of ids) {
+    //   axios({
+    //     method: 'get',
+    //     url: '/course/problem/',
+    //     params: {
+    //       ProblemId: questionId
+    //     }
+    //   }).then(response => {
+    //     _questions.push(response.data);
+    //   }).catch(e => {});
+    // }
+
+    // setTimeout(function() {
+    //     let myQuestions = [];
+    //     for (let question of _questions) {
+    //       let {id, pro_detail: content, option: options} = question;
+    //       myQuestions.push({id: id, content: content, options: options})
+    //       console.log(1);
+    //     }
+    //     console.log(myQuestions);
+    //     commit(types.ADD_QUESTIONS, myQuestions)
+    // }, 2000);
+
+    // let myQuestions = [];
+    // 规范化处理
+    // for (let question of questions.getQuestions()) {
+    //   let {id, pro_detail: content, option: options} = question;
+    //   myQuestions.push({id: id, content: content, options: options})
+    // }
+    //
+    // commit(types.ADD_QUESTIONS, myQuestions)
+    // console.log(state.questions);
   },
 
   getJudge({commit, state}) {
@@ -118,7 +181,7 @@ const actions = {
     // let {id,problemNote:note} = collection.getCollection();
     let coll = collection.getCollection();
     qs = questions.getQuestions();
-    for (var index in coll) {
+    for (let index in coll) {
       questionsC.push({id: coll[index].id, correct: coll[index].problemAns, note: coll[index].problemNote, content: qs[index].pro_detail, options: qs[index].option});
     }
     commit(types.ADD_QUESTIONSC, questionsC);
@@ -136,7 +199,15 @@ const mutations = {
   },
 
   [types.ADD_QUESTIONS](state, questions) {
-    state.questions = questions;
+    // for (var i in questions) {
+    //   Vue.set(state.questions, i, questions[i]);
+    // }
+    state.questions = [];
+    for (let q of questions) {
+      state.questions.push(q);
+    }
+    // state.questions = questions;
+    console.log(state.questions);
   },
 
   [types.ADD_RESULT](state, result) {
@@ -169,6 +240,13 @@ const mutations = {
 
   [types.CLEAR_ANSWERS](state) {
     state.answers = [];
+  },
+
+  [types.INIT_SELECTED](state) {
+    for (var i = 0; i < state.exam.questions.total; i++) {
+      Vue.set(state.selected, i, -1);
+    }
+    console.log(state.exam.questions.total);
   }
 }
 

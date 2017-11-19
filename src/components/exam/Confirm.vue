@@ -1,7 +1,7 @@
 <template>
 <div id="Confirm">
-    <h1>{{exam.title}}</h1>
-    <h2>{{exam.year}}</h2>
+  <h1>{{exam.title}}</h1>
+  <h2>{{exam.year}}</h2>
 
 
   <Row type="flex" justify="space-around" class="code-row-bg">
@@ -43,8 +43,11 @@ export default {
     },
     beginExam() {
       this.$store.dispatch('getExam');
-      this.$store.dispatch('getQuestions');
-      this.$router.push('/question/work');
+      setTimeout(() => {
+        this.$store.dispatch('getQuestions');
+      }, 1000);
+
+      // this.$router.push('/question/work');
     },
   },
 

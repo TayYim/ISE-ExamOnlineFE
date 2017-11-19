@@ -94,6 +94,8 @@ export default {
             success
           } = utils.login(this.form.user, this.form.password);
 
+          console.log(name,success);
+
           if (success) {
             this.$Message.success('登陆成功');
             this.$store.commit('toggleLogged');
