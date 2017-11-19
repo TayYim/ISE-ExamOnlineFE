@@ -11,11 +11,11 @@
         <Col span="4">
         <strong>{{index+1}}.</strong>
         <p>
-          <Button size="small" type="ghost">收藏此题</Button>
+          <Button size="large" type="text"><Icon type="ios-star-outline"></Icon></Button>
         </p>
-        <p>
+        <!-- <p>
           <Button size="small" type="ghost">题目报错</Button>
-        </p>
+        </p> -->
         </Col>
         <Col span="14" align='left'>
         <div>
@@ -23,9 +23,9 @@
         </div>
         <div>
           <ul class="options">
-              <li v-for="(option,indexO) in question.options">
-                  <span v-html="_expr(question.options[indexO])"></span>
-              </li>
+            <li v-for="(option,indexO) in question.options">
+              {{ABCD[indexO]}}. <span v-html="_expr(question.options[indexO])"></span>
+            </li>
           </ul>
         </div>
         </Col>
@@ -54,7 +54,7 @@
 export default {
   name: "Result",
   data: () => ({
-
+      ABCD: ["A","B","C","D"]
   }),
 
   methods: {
@@ -101,13 +101,25 @@ export default {
         case "0":
           return "A";
           break;
+        case 0:
+          return "A";
+          break;
         case "1":
+          return "B";
+          break;
+        case 1:
           return "B";
           break;
         case "2":
           return "C";
           break;
+        case 2:
+          return "C";
+          break;
         case "3":
+          return "D";
+          break;
+        case 3:
           return "D";
           break;
         default:
@@ -117,8 +129,8 @@ export default {
     },
 
     finish() {
-        this.$store.dispatch('clear');
-        this.$router.push('/exam/normal');
+      this.$store.dispatch('clear');
+      this.$router.push('/exam/normal');
     }
   },
 

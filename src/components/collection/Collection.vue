@@ -105,13 +105,25 @@ export default {
         case "0":
           return "A";
           break;
+        case 0:
+          return "A";
+          break;
         case "1":
+          return "B";
+          break;
+        case 1:
           return "B";
           break;
         case "2":
           return "C";
           break;
+        case 2:
+          return "C";
+          break;
         case "3":
+          return "D";
+          break;
+        case 3:
           return "D";
           break;
         default:

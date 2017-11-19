@@ -152,27 +152,12 @@ const actions = {
     // console.log(state.questions);
   },
 
-  test({commit, state, rootState}){
-      console.log('test');
-      let qs = state.questions;
-      let sl = state.selected;
-      for (var i in state.questions) {
-        console.log(qs);
-        console.log(sl);
-      }
-  },
-
   getJudge({commit, state, rootState}) {
 
     let answerSheet = [];
-    // for (let i = 0; i < state.total; i++) {
-    //
-    // }
     for (var i in state.questions) {
-      answerSheet.push({id: state.questions[i].id, originAns: state.selected[i]})
-      console.log(i);
-      console.log(state.questions[i].id);
-      console.log(state.selected[i]);
+        let oa = state.selected[i].toString();
+      answerSheet.push({id: state.questions[i].id, originAns: oa})
     }
     console.log(answerSheet);
     //rootState.user.name

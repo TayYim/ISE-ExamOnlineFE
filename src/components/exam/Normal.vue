@@ -1,6 +1,5 @@
 <template>
 <div id="Normal">
-  <Button @click="test">testjudge</Button>
   <slot></slot>
   <Row>
     <Col span="10">
@@ -58,9 +57,6 @@ export default {
       this.$store.commit(types.ADD_EXAM, exam);
       this.$store.commit(types.SET_MODE, 0);
       this.$router.push('confirm');
-    },
-    test() {
-        this.$store.dispatch('test');
     }
   },
 
