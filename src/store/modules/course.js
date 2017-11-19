@@ -152,21 +152,50 @@ const actions = {
     // console.log(state.questions);
   },
 
-  getJudge({commit, state}) {
-    let answers = [];
-    let result = [];
-    // will use state.selected
-    //规范化处理
-    let {evaluate, Problems} = judge.getJudge();
+  test({commit, state, rootState}){
+      console.log('test');
+      let qs = state.questions;
+      let sl = state.selected;
+      for (var i in state.questions) {
+        console.log(qs);
+        console.log(sl);
+      }
+  },
 
-    for (let problem of Problems) {
-      answers.push({correct: problem.correctAns});
-      result.push(problem.result);
+  getJudge({commit, state, rootState}) {
+
+    let answerSheet = [];
+    // for (let i = 0; i < state.total; i++) {
+    //
+    // }
+    for (var i in state.questions) {
+      answerSheet.push({id: state.questions[i].id, originAns: state.selected[i]})
+      console.log(i);
+      console.log(state.questions[i].id);
+      console.log(state.selected[i]);
     }
+    console.log(answerSheet);
+    //rootState.user.name
+    judge.getJudge("Lapalaca", answerSheet, (_judge) => {
+      console.log('ok');
+      console.log(_judge);
 
-    commit(types.ADD_ANSWERS, answers)
-    commit(types.ADD_RESULT, result)
-    commit(types.ADD_EVALUATE, evaluate)
+      let answers = [];
+      let result = [];
+      //规范化处理
+      let {evaluate, Problems} = _judge;
+
+      for (let problem of Problems) {
+        answers.push({correct: problem.correctAns});
+        result.push(problem.result);
+      }
+
+      commit(types.ADD_ANSWERS, answers)
+      commit(types.ADD_RESULT, result)
+      commit(types.ADD_EVALUATE, evaluate)
+      router.push('result');
+    })
+
   },
 
   getquestionsC({

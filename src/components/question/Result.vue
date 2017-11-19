@@ -23,10 +23,9 @@
         </div>
         <div>
           <ul class="options">
-            <li>A. <span v-html="_expr(question.options[0])"></span></li>
-            <li>B. <span v-html="_expr(question.options[1])"></span></li>
-            <li>C. <span v-html="_expr(question.options[2])"></span></li>
-            <li>D. <span v-html="_expr(question.options[3])"></span></li>
+              <li v-for="(option,indexO) in question.options">
+                  <span v-html="_expr(question.options[indexO])"></span>
+              </li>
           </ul>
         </div>
         </Col>

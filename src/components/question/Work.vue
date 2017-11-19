@@ -83,7 +83,7 @@ export default {
     ok() {
       this.$Message.success('交卷成功');
       this.$store.dispatch('getJudge');
-      this.$router.push('result');
+      // this.$router.push('result');
     },
 
     _expr: function (expr) {
