@@ -45,7 +45,7 @@ export default {
       this.$store.dispatch('getExam');
       setTimeout(() => {
         this.$store.dispatch('getQuestions');
-      }, 1000);
+    }, 500);
 
       // this.$router.push('/question/work');
     },

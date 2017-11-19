@@ -185,20 +185,38 @@ const actions = {
 
   getquestionsC({
     commit,
-    state
+    state,
+    rootState
   }, subjectId) {
 
-    let qs = [];
-    let questionsC = [];
+    collection.getCollection(subjectId,rootState.user.name,(_collection)=>{
+        let qC = [];
+        for (let problem of _collection.problems) {
+            let pack = {
+                id: problem.id,
+                correct: problem.pro_ans,
+                note: problem.problemNote,
+                content: problem.pro_detail,
+                options: ["A","B","C","D"]
+            }
+            qC.push(pack);
+        }
+        commit(types.ADD_QUESTIONSC, qC);
+    })
 
-    //规范化处理
-    // let {id,problemNote:note} = collection.getCollection();
-    let coll = collection.getCollection();
-    qs = questions.getQuestions();
-    for (let index in coll) {
-      questionsC.push({id: coll[index].id, correct: coll[index].problemAns, note: coll[index].problemNote, content: qs[index].pro_detail, options: qs[index].option});
-    }
-    commit(types.ADD_QUESTIONSC, questionsC);
+    // let qs = [];
+    // let questionsC = [];
+    //
+    // //规范化处理
+    // // let {id,problemNote:note} = collection.getCollection();
+    // let coll = collection.getCollection();
+    // // qs = questions.getQuestions();
+    // qs = state.questions;
+    // for (let index in coll) {
+    //   // questionsC.push({id: coll[index].id, correct: coll[index].problemAns, note: coll[index].problemNote, content: qs[index].pro_detail, options: qs[index].option});
+    //   questionsC.push({id: coll[index].id, correct: coll[index].problemAns, note: coll[index].problemNote, content: qs[index].pro_detail, options: qs[index].option});
+    // }
+    // commit(types.ADD_QUESTIONSC, questionsC);
   }
 }
 
