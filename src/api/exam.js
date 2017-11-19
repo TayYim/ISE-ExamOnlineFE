@@ -26,42 +26,44 @@ const _exam = {
 }
 
 export default {
-  getExam() {
-    return _exam;
-  },
-
-  // getExam(id, mode) {
-  //   let _exam = {};
-  //
-  //   if (mode === 0) {
-  //     //normal
-  //     axios({
-  //       method: 'get',
-  //       url: '/course/paper/',
-  //       params: {
-  //         paperId: id
-  //       }
-  //     }).then(response => {
-  //       _exam = response.data;
-  //     }).catch(e => {
-  //       console.log('err');
-  //     });
-  //   } else {
-  //     //random
-  //     axios({
-  //       method: 'get',
-  //       url: '/course/infinite/',
-  //       params: {
-  //         infinite: 1,
-  //         course_type: id
-  //       }
-  //     }).then(response => {
-  //       _exam = response.data;
-  //     }).catch(e => {
-  //       console.log('err');
-  //     });
-  //   }
-  //   // handle the type!!
+  // getExam() {
   //   return _exam;
-  // }
+  // },
+
+  getExam(id, mode,cb) {
+    let _exam = {};
+
+    if (mode === 0) {
+      //normal
+      axios({
+        method: 'get',
+        url: '/course/paper/',
+        params: {
+          paperId: id
+        }
+      }).then(response => {
+        _exam = response.data;
+        cb(_exam)
+      }).catch(e => {
+        console.log('err');
+      });
+    } else {
+      //random
+      axios({
+        method: 'get',
+        url: '/course/infinite/',
+        params: {
+          infinite: 1,
+          course_type: id
+        }
+      }).then(response => {
+        _exam = response.data;
+        cb(_exam)
+      }).catch(e => {
+        console.log('err');
+      });
+    }
+    // handle the type!!
+    return _exam;
+  }
 }

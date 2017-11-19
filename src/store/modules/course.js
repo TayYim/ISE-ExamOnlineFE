@@ -45,14 +45,14 @@ const actions = {
     commit
   }, subjectId) {
 
-    exams.getExams(subjectId,(_exams)=>{
-        let myExams = [];
-        console.log(_exams);
-        for (let exam of _exams) {
-          let {id, paper_title: title, paper_year: year} = exam;
-          myExams.push({'id': id, 'title': title, 'year': year});
-        }
-        commit(types.ADD_EXAMS, myExams)
+    exams.getExams(subjectId, (_exams) => {
+      let myExams = [];
+      console.log(_exams);
+      for (let exam of _exams) {
+        let {id, paper_title: title, paper_year: year} = exam;
+        myExams.push({'id': id, 'title': title, 'year': year});
+      }
+      commit(types.ADD_EXAMS, myExams)
     })
 
   },
@@ -63,30 +63,18 @@ const actions = {
   },
 
   getExam({commit, state}) { //to be simplified
-    let questions;
-    if (state.mode === 0) {
-      //规范化处理
-      let {ProblemNum, Problems} = exam.getExam();
 
-      questions = {
+    exam.getExam(state.exam.id, state.mode, (_exam) => {
+      let {ProblemNum, Problems} = _exam;
+      let questions = {
         total: ProblemNum,
         id: []
       };
       for (let question of Problems) {
         questions.id.push(question.ProblemId);
       }
-    } else {
-      let {ProblemNum, Problems} = exam.getExam(); //random
-
-      questions = {
-        total: ProblemNum,
-        id: []
-      };
-      for (let question of Problems) {
-        questions.id.push(question.ProblemId);
-      }
-    }
-    commit(types.ADD_EXAM, {questions: questions})
+      commit(types.ADD_EXAM, {questions: questions})
+    })
   },
 
   getQuestions({commit, state}) {
