@@ -55,6 +55,8 @@ import {
 
 import utils from '@/api/utils'
 
+import axios from '@/axios';
+
 export default {
   name: "Register",
   data() {
@@ -135,17 +137,39 @@ export default {
   },
 
   methods: {
+      /**
+       * 没有用到util，直接复制了过来
+       * @param  {[type]} name [description]
+       * @return {[type]}      [description]
+       */
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          let {
-            success
-          } = utils.register(this.form.useremail, this.form.username, this.form.password, this.form.chaptcha);
-          if (success) {
-            this.$Message.success('注册成功');
-          } else {
-            this.$Message.error('注册失败!');
+
+          let pack = {
+            email: this.form.useremail,
+            username: this.form.username,
+            password: this.form.password,
+            validate: this.form.chaptcha
           }
+
+          axios({
+            method: 'post',
+            url: '/user/register/',
+            data: pack
+          }).then(response => {
+            let name = response.data.username;
+            let success = response.data.success;
+            let err = response.data.err_msg;
+            if (success) {
+              this.$Message.success('注册成功');
+            } else {
+              this.$Message.error('注册失败!'+err);
+            }
+            console.log(response);
+          }).catch(e => {
+            console.log(e);
+          });
         } else {
           this.$Message.error('请输入正确的信息!');
         }
@@ -154,16 +178,28 @@ export default {
     ...mapMutations([
       'setCurrentPage',
     ]),
+    /**
+     * 没有用到util，直接复制了过来
+     * @return {[type]} [description]
+     */
     sendEmail() {
-      let {
-        success
-      } =
-      utils.sendEmail(this.form.useremail);
-      if (success) {
-          console.log("send ok!");
-      }else {
-          console.log("can not send");
-      }
+      axios({
+        method: 'post',
+        url: '/user/sendEmail/',
+        data: {
+          email: this.form.useremail
+        }
+      }).then(response => {
+        let success = response.data.success;
+        if (success) {
+          this.$Message.success('发送成功!');
+        } else {
+          this.$Message.error('发送失败!');
+        }
+        console.log(response);
+      }).catch(e => {
+        console.log(e);
+      });
     }
   }
 }

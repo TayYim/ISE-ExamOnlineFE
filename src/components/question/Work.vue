@@ -1,7 +1,5 @@
 <template>
 <div id="Work">
-    {{selected}}
-
   <Row>
     <Col span="10">
     <h1>{{exam.title}}</h1>
@@ -38,8 +36,6 @@
             <div v-for="(option,indexO) in question.options">
               <Radio :label="indexO">
                 <span v-html="_expr(question.options[indexO])"></span>
-                {{index}}
-                {{indexO}}
               </Radio>
             </div>
           </RadioGroup>

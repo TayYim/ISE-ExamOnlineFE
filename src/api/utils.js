@@ -1,6 +1,8 @@
 import axios from '@/axios';
+import router from '@/router'
 
 function login(user, password) {
+  // prepare data
   let emailPatt = /^[a-z_0-9.-]{1,64}@([a-z0-9-]{1,200}.){1,5}[a-z]{1,6}$/;
   let type = emailPatt.test(user)
     ? "email"
@@ -11,17 +13,13 @@ function login(user, password) {
     password: password
   }
 
-  // let name,
-  //   success;
-
   axios({method: 'post', url: '/user/login/', data: pack}).then(response => {
     let name = response.data.username;
     let success = response.data.success;
-    (name, success) => {
-    console.log("now");
-      return {name: name, success: success};
-    }
+    // this.$Message.success('登陆成功');
+    router.push('/exam/normal');
     console.log(response);
+
   }).catch(e => {
     console.log(e);
   });

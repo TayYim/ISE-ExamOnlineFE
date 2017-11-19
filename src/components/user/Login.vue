@@ -44,6 +44,8 @@ import utils from '@/api/utils'
 
 import * as types from '@/store/mutation-types'
 
+import axios from '@/axios';
+
 export default {
   name: "Login",
   data() {
@@ -86,24 +88,46 @@ export default {
   },
 
   methods: {
+    /**
+     * 没有用到util，直接复制了过来
+     * @param  {[type]} name [description]
+     * @return {[type]}      [description]
+     */
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          let {
-            name,
-            success
-          } = utils.login(this.form.user, this.form.password);
+          let user = this.form.user;
+          let password = this.form.password;
+          // prepare data
+          let emailPatt = /^[a-z_0-9.-]{1,64}@([a-z0-9-]{1,200}.){1,5}[a-z]{1,6}$/;
+          let type = emailPatt.test(user) ?
+            "email" :
+            "username";
 
-          console.log(name,success);
-
-          if (success) {
-            this.$Message.success('登陆成功');
-            this.$store.commit('toggleLogged');
-            this.$store.commit(types.ADD_NAME,name);
-            this.$router.push('/exam/normal');
-          } else {
-            this.$Message.error('登陆失败!');
+          let pack = {
+            [type]: user,
+            password: password
           }
+
+          axios({
+            method: 'post',
+            url: '/user/login/',
+            data: pack
+          }).then(response => {
+            let name = response.data.username;
+            let success = response.data.success;
+            if (success) {
+              this.$Message.success('登陆成功');
+              this.$store.commit('toggleLogged');
+              this.$store.commit(types.ADD_NAME, name);
+              this.$router.push('/exam/normal');
+            } else {
+              this.$Message.error('登陆失败!');
+            }
+            console.log(response);
+          }).catch(e => {
+            console.log(e);
+          });
         } else {
           this.$Message.error('请输入正确的信息!');
         }
